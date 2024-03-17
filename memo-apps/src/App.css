@@ -1,0 +1,169 @@
+
+.header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(216, 216, 216);
+  box-shadow: 0 1px 1px -1px black;
+  position: fixed;
+  background-color: white;
+  z-index: 1;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 900;
+  margin-left: 50px;
+  color: rgba(4, 59, 141, 0.836);
+}
+
+.header p {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+/* sidebar */
+
+.sidebar {
+  width: 20%;
+  height: 100%;
+  padding-top: 45px;
+  margin-top: -80px;
+  position: fixed;
+  top: 160px;
+  background-color: rgba(128, 128, 128, 0.089);
+}
+
+.sidebar .sidebar-menu {
+  height: 30px;
+  padding: 8px 0 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebar .sidebar-menu:hover {
+  background-color: rgb(219, 219, 219);
+  font-weight: 900;
+} 
+
+.sidebar img {
+  width: 20px;
+  margin-right: 15px;
+  background-size: cover;
+}
+
+.sidebar .home h2, .today h2, .important h2 {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.sidebar p {
+  margin-right: 20px;
+}
+
+/* content */
+
+.main-container {
+  padding-top: 80px;
+}
+
+.content-container {
+  width: 100%;
+}
+
+.search {
+  width: 60%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid rgb(197, 197, 197);
+  overflow: hidden;
+  position: relative;
+  top: 20px;
+  left: 25%;
+  position: fixed;
+  background-color: rgba(128, 128, 128, 0.089);
+  z-index: 1;
+}
+
+.search img {
+  height: 15px;
+  margin-left: 10px;
+  background-size: contain;
+}
+
+.search input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  margin-left: 10px;
+  background-color: transparent;
+}
+
+.main {
+  margin : -73px 0 0 30px;
+  height: 80.5vh;
+}
+
+.main h2 {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.main .tag {
+  font-weight: 700;
+  margin-top: 30px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 1px 1px -1px rgb(177, 177, 177);
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.main .tag .addmemo {
+  margin-right: 70px;
+  color: rgb(90, 90, 90);
+  cursor: pointer;
+}
+
+.main .tag .addmemo:hover {
+  color: black;
+}
+
+.main .content-box {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.content-box .content {
+  width: 200px;
+  height: 200px;
+  margin: 0px 5% 3% 0;
+  border-radius: 10px;
+  border: 1px solid blue;
+  cursor: pointer;
+}
+
+.content-box .content:hover {
+  animation: updown;
+  animation-duration : .5s;
+}
