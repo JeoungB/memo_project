@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addMemo } from "../store";
 import ReactQuill from "react-quill";
-import * as DOMPurify from "dompurify";
 import axios from "axios";
 import spinner from "../imgs/Rolling-1s-200px.gif"
 import "react-quill/dist/quill.snow.css";
@@ -11,6 +13,8 @@ const WritePage = () => {
   const [content, setContent] = useState("");
   const [loding, setLoding] = useState(false);
   const quillRef = useRef();
+  let dispatch = useDispatch();
+  let navigates = useNavigate();
 
   const imageHandler = () => {
     // 이미지 삽입 할 input 생성.
@@ -71,16 +75,30 @@ const WritePage = () => {
     "image",
   ];
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const today = new Date();
+    const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+    let newMemo = {
+      id : Date.now(),
+      title : title,
+      content : content,
+      date : date,
+      important : false
+    }
+
+    dispatch(addMemo(newMemo));
+    
+    alert("생성되었습니다.");
+    navigates('/');
+  };
+
   return (
     // 메모 태그
     // 파일 첨부
-    <div className="writepage" style={{
-      position : "relative",
-      top : "125px",
-      left : "25%",
-      width : "70%",
-      height : "100%"
-    }}>
+    <div className="writepage">
       <h2>Addmemo</h2>
       <div className="write-container">
         <input type="text" name="title" placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}></input>
@@ -115,11 +133,8 @@ const WritePage = () => {
             ) : null
           }
         </div>
-        <button className="submit">submit</button>
+        <button className="submit" onClick={handleSubmit}>submit</button>
       </div>
-
-      {/* <div>--------- 미리 보기 ---------------------</div>
-        <div style={{width : "60vw", border : "1px solid black"}} dangerouslySetInnerHTML={{__html : DOMPurify.sanitize(content)}}></div> */}
     </div>
   );
 };

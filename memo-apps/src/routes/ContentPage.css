@@ -1,0 +1,93 @@
+.ContentPage {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    float: right;
+    z-index: 2;
+}
+
+.main-content {
+    height: 10px;
+    position: relative;
+    top: 206px;
+    left: 25%;
+    margin : -73px 0 0 30px;
+    height: 80.5vh;
+}
+
+.main-content h2 {
+    font-size: 30px;
+    font-weight: 900;
+    position: relative;
+    z-index: -1;
+}
+
+.menu-container {
+    text-align : center;
+    position : relative;
+    display : flex;
+    justify-content : center;
+    margin-right: 70px;
+    color : rgb(90, 90, 90);
+}
+
+.main-content .tag {
+    width: 75%;
+    font-weight: 700;
+    margin-top: 30px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 1px 1px -1px rgb(177, 177, 177);
+    border-bottom: 1px solid rgb(233, 233, 233);
+  }
+
+.menu-icon {
+    cursor: pointer;
+    margin-right: 70px;
+    color: rgb(90, 90, 90);
+}
+
+.menu-icon:hover {
+    color: black;
+}
+
+.menu {
+    width : 50px;
+    height : 78px;
+    position : absolute;
+    top : 40px;
+    left: -11.5px;
+    text-align : center;
+    z-index: 3;
+    background-color : rgb(244, 244, 244);
+}
+
+.menu .delete {
+    padding : 15px 0 10px 0;
+    border-bottom : 1px solid black;
+    cursor : pointer;
+}
+
+.menu .modify {
+    padding : 10px 0 10px 0;
+    border-bottom : 1px solid black;
+    cursor : pointer;
+}
+
+.menu-point {
+    width : 25px;
+    height : 25px;
+    position : absolute;
+    top : 30px;
+    left: 0px;
+    z-index: 2;
+    background-color : rgb(244, 244, 244);
+    transform : rotate(45deg);
+}
+
+.viwer {
+    position: relative;
+    z-index: 9;
+}

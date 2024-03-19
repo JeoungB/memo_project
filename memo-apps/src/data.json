@@ -16,8 +16,8 @@
         },
         {
             "id" : 2,
-            "title" : "제목 이에용2",
-            "content" : "컨텐츠 에용2",
+            "title" : "title~",
+            "content" : "컨텐츠 에용3",
             "important" : false,
             "day" : "2024-03-12"
         }

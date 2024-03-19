@@ -1,0 +1,124 @@
+.modal-containers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    background-color: rgb(182, 177, 177);
+    opacity: .5;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 35vw;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    border: 2px solid blue;
+    z-index: 7;
+    background-color: rgb(255, 255, 255);
+}
+
+.modal h1 {
+    font-size: 30px;
+    font-weight: 900;
+    text-transform: capitalize;
+    color: rgb(55, 128, 196);
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+}
+
+.modal .project-tag {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 78%;
+    top: 12.5%;
+    border-radius: 30px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.modal .color {
+    position: relative;
+    left: 83%;
+    top: 18%;
+}
+
+.modal .project-title {
+    width: 60%;
+    height: 10%;
+    margin-bottom: 30px;
+    outline: none;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+.modal .sub-title {
+    width: 60%;
+    height: 10%;
+    margin-bottom: 30px;
+    outline: none;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+}
+
+.modal .modal-p1 {
+    position: absolute;
+    left: 20%;
+    top: 30%;
+    font-size: 1rem;
+}
+
+.modal .modal-p1 span {
+    color: red;
+}
+
+.modal .modal-p2 {
+    position: absolute;
+    left: 20%;
+    top: 50%;
+    font-size: 1rem;
+}
+
+.buttons {
+    position: absolute;
+    left: 18%;
+    top: 75%;
+    width: 65%;
+    height: 4vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons button {
+    width: 40%;
+    background-color: transparent;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+
+.buttons .create:hover {
+    border-color: blue;
+    color: blue;
+    cursor: pointer;
+}
+
+.buttons .cancel:hover {
+    border-color: red;
+    color: red;
+    cursor: pointer;
+}
+

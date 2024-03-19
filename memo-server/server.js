@@ -18,6 +18,7 @@ app.listen(port, function() {
 const upload = multer({
     storage: multer.diskStorage({
         // 이미지 저장 공간(경로) 지정.
+        // 이미지 저장공간 자동 삭제 기능 추가 해야함.
       destination(req, file, cb) {
         cb(null, 'public/uploadImgs');
       },

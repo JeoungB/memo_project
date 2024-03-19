@@ -1,6 +1,11 @@
 .writepage {
     margin : -73px 0 0 30px;
     height: 81vh;
+    position : relative;
+    top : 175px;
+    left : 25%;
+    width : 70%;
+    height : 100%;
 }
 
 .writepage h2 {
