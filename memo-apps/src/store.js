@@ -25,10 +25,40 @@ let memo = createSlice({
     }
 });
 
+let groupMemo = createSlice({
+    name : "groupmemo",
+    initialState : [
+        {id : 0, title : "First Group", subTitle : "첫번째 그룹 메모들", color : "#"},
+        {id : 1, title : "Second Group", subTitle : "두번째 그룹 메모들", color : "#0000ff"},
+        {id : 2, title : "Third Group Important Name", subTitle : "두번째 그룹 메모들", color : "#a52a2a"}
+    ],
+    reducers : {
+        addGroup(state, action) {
+            let newState = state.concat(action.payload);
+            return newState;
+        }
+    }
+});
+
+let modal = createSlice({
+    name : "modal",
+    initialState : false,
+    reducers : {
+        setModal(state, action) {
+            state = action.payload;
+            return state;
+        }
+    }
+});
+
 export let { addMemo, deleteMemo } = memo.actions;
+export let { setModal } = modal.actions;
+export let { addGroup } = groupMemo.actions;
 
 export default configureStore({
   reducer: {
-    memo : memo.reducer
+    memo : memo.reducer,
+    modal : modal.reducer,
+    groupMemo : groupMemo.reducer
    }
 });

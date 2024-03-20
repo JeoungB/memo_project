@@ -33,15 +33,52 @@
     transform: translate(-50%, -50%);
 }
 
-.modal .project-tag {
+.modal .project-color-tag {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 2vw;
+    height: 2vw;
     left: 78%;
     top: 12.5%;
-    border-radius: 30px;
+    border-radius: 2vw;
     border: 2px solid black;
     cursor: pointer;
+}
+
+@keyframes motion {
+    0% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: 4px;
+    }
+}
+
+.modal .project-color-tag .notification {
+    width: 15vw;
+    height: 20px;
+    position: absolute;
+    right: 0px;
+    top: -2px;
+    transform: translate(43%, -180%);
+    background-color: rgb(169, 188, 251);
+    text-align: center;
+    line-height: 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    animation: motion .5s linear 0s infinite alternate;
+    color: white;
+}
+
+.modal .project-color-tag .notification .point {
+    width: 0;
+    height: 0;
+    border-top: 10px solid rgb(169, 188, 251);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    position: relative;
+    left: 50%;
+    top: -1px;
+    transform: translate(-50%, 0);
 }
 
 .modal .color {
@@ -92,9 +129,9 @@
 
 .buttons {
     position: absolute;
-    left: 18%;
+    left: 18.5%;
     top: 75%;
-    width: 65%;
+    width: 63.5%;
     height: 4vw;
     display: flex;
     justify-content: space-between;

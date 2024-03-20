@@ -8,17 +8,18 @@ import star from "./imgs/star.svg";
 import arrow from "./imgs/arrow.svg";
 import WritePage from "./routes/writePage";
 import { Routes, Route, useNavigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import HomePage from "./routes/HomePage";
 import ContentPage from "./routes/ContentPage";
 import AddProject from "./routes/AddProject";
 import { useEffect, useState } from "react";
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
+import { setModal } from "./store";
 
 let MenubarImg = styled.img`
 position: relative;
 left: 27px;
-transform: rotate(${props => props.$menuberImg}deg);
+transform: rotate(${props => props.$menubarImg}deg);
 cursor: pointer;
 transition-duration: .5s;
 `;
@@ -33,18 +34,21 @@ background-color: blue;
 
 function App() {
 
-  const [menuberImg, setMenuberImg] = useState(-90);
+  const [menubarImg, setMenubarImg] = useState(-90);
   const [imgToggle, setimgToggle] = useState(false);
   let memoList = useSelector((state) => state.memo);
+  let modalState = useSelector((state) => state.modal);
+  let groupMemo = useSelector((state) => state.groupMemo);
   let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   useEffect(() => {
     if(!imgToggle) {
-      setMenuberImg(-90);
+      setMenubarImg(-90);
     }
 
     if(imgToggle) {
-      setMenuberImg(0);
+      setMenubarImg(0);
     }
   }, [imgToggle]);
 
@@ -90,15 +94,23 @@ function App() {
           </div>
           <div className="line"></div>
           <div className="sidebar-menu projects">
-            <MenubarImg $menuberImg={menuberImg} src={arrow} onClick={() => {
+            <MenubarImg $menubarImg={menubarImg} src={arrow} onClick={() => {
               setimgToggle(!imgToggle);
             }}></MenubarImg>
-            <h2>projects</h2>
-            <p className="add-project">+</p>
-            <div className="projects-list">
-              <div className="list-icon">*</div>
-              <p>ddd</p>
-            </div>
+            <h2>groupMemos</h2>
+            <p className="add-project" onClick={() => {
+              dispatch(setModal(true));
+            }}>+</p>
+
+            {
+              groupMemo.map((groupMemo) => {
+                return <div className="projects-list" key={groupMemo.id}>
+                <div className="list-icon" style={{backgroundColor : `${groupMemo.color}`}}></div>
+                {groupMemo.title}
+              </div>
+              })
+            }
+
           </div>
         </div>
 
@@ -109,7 +121,11 @@ function App() {
           </div>
         </div>
         </div>
-        <AddProject />
+        {
+          modalState ? (
+            <AddProject />
+          ) : null
+        }
         <Outlet></Outlet>
         </div>
       }>
