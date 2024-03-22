@@ -13,12 +13,19 @@
     font-weight: 900;
 }
 
+.writepage .inputs {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
 .writepage input {
-    width: 40%;
+    width: 50%;
     height: 30px;
-    margin: 20px 0 20px 0;
     padding-left: 10px;
     outline: none;
+    margin-bottom: 20px;
 }
 
 .editor {

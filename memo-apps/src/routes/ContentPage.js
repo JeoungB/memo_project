@@ -25,7 +25,7 @@ const ContentPage = () => {
               <div className="main-content">
                     <h2>{currentItem.title}</h2>
                     <div className="tag">
-                      <p>태그</p>
+                      <p>{currentItem?.subTitle}</p>
                       <div className="menu-container">
                         <p className="menu-icon" onClick={(e) => {
                           e.stopPropagation();

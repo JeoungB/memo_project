@@ -9,7 +9,8 @@ import "react-quill/dist/quill.snow.css";
 import "./write.css";
 
 const WritePage = () => {
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
+  const [subTitle, setsubTitle] = useState("");
   const [content, setContent] = useState("");
   const [loding, setLoding] = useState(false);
   const quillRef = useRef();
@@ -84,6 +85,7 @@ const WritePage = () => {
     let newMemo = {
       id : Date.now(),
       title : title,
+      subTitle : subTitle,
       content : content,
       date : date,
       important : false
@@ -101,7 +103,10 @@ const WritePage = () => {
     <div className="writepage">
       <h2>Addmemo</h2>
       <div className="write-container">
+        <div className="inputs">
         <input type="text" name="title" placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}></input>
+        <input type="text" name="subTitle" placeholder="Memo Description" onChange={(e) => {setsubTitle(e.target.value)}}></input>
+        </div>
         <div className="editor">
           <ReactQuill
             value={content}
