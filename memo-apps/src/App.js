@@ -36,11 +36,21 @@ function App() {
 
   const [menubarImg, setMenubarImg] = useState(-90);
   const [imgToggle, setimgToggle] = useState(false);
+  const body = document.querySelector('body');
   let memoList = useSelector((state) => state.memo);
   let modalState = useSelector((state) => state.modal);
   let groupMemo = useSelector((state) => state.groupMemo);
   let navigate = useNavigate();
   let dispatch = useDispatch();
+
+  useEffect(() => {
+    if(modalState === true) {
+      body.style.overflowY = 'hidden';
+    }
+    if(modalState === false) {
+      body.style.overflowY = '';
+    }
+  }, [modalState]);
 
   useEffect(() => {
     if(!imgToggle) {
