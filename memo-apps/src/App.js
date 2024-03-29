@@ -15,6 +15,8 @@ import AddProject from "./routes/AddProject";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { setModal } from "./store";
+import GroupContents from "./routes/GroupContents";
+import SelectGroupMemo from './routes/SelectGroupMemo';
 
 let MenubarImg = styled.img`
 position: relative;
@@ -37,20 +39,35 @@ function App() {
   const [menubarImg, setMenubarImg] = useState(-90);
   const [imgToggle, setimgToggle] = useState(false);
   const body = document.querySelector('body');
-  let memoList = useSelector((state) => state.memo);
-  let modalState = useSelector((state) => state.modal);
-  let groupMemo = useSelector((state) => state.groupMemo);
+  const memoList = useSelector((state) => state.memo);
+  const modalState = useSelector((state) => state.modal);
+  const groupMemo = useSelector((state) => state.groupMemo);
+  const selectModal = useSelector((state) => state.selectModal);
   let navigate = useNavigate();
   let dispatch = useDispatch();
+
+  // let memos = JSON.parse(sessionStorage.getItem('persist:memo')).memo;
+  // console.log(memos)
 
   useEffect(() => {
     if(modalState === true) {
       body.style.overflowY = 'hidden';
+      window.scrollTo(0,0);
     }
     if(modalState === false) {
       body.style.overflowY = '';
     }
   }, [modalState]);
+
+  useEffect(() => {
+    if(selectModal === true) {
+      body.style.overflowY = 'hidden';
+      window.scrollTo(0,0);
+    }
+    if(selectModal === false) {
+      body.style.overflowY = '';
+    }
+  }, [selectModal]);
 
   useEffect(() => {
     if(!imgToggle) {
@@ -114,7 +131,9 @@ function App() {
 
             {
               groupMemo.map((groupMemo) => {
-                return <div className="projects-list" key={groupMemo.id}>
+                return <div className="projects-list" key={groupMemo.id} onClick={() => {
+                  navigate(`/group/${groupMemo.id}`);
+                }}>
                 <div className="list-icon" style={{backgroundColor : `${groupMemo.color}`}}></div>
                 {groupMemo.title}
               </div>
@@ -136,14 +155,23 @@ function App() {
             <AddProject />
           ) : null
         }
+
+        {
+          selectModal ? (
+            <SelectGroupMemo />
+          ) : null
+        }
         <Outlet></Outlet>
         </div>
       }>
         <Route path="/" element={<HomePage />} />
         <Route path="/write" element={<WritePage />} />
-        {/* content URL 파람에 선택한 제목도 같이 추가하기 */}
+        {/* content URL 파람에 선택한 제목도 같이 추가하기 group 도 */}
+        <Route path="/group/:id" element={<GroupContents />} />
       <Route path="/content/:id" element={<ContentPage />} />
       </Route>
+
+      <Route path="/*" element={<div>없는 페이지</div>} />
       </Routes>
         </div>
   );

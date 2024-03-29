@@ -16,30 +16,16 @@
     flex-wrap: wrap;
   }
 
-  /* @keyframes updown {
-    0% {
-      transform: translateY(-10px);
-    }
-  
-    100% {
-      transform: translateY(0);
-    }
-  } */
-
 .content-box .content-container {
     width: 45%;
     height: 150px;
     margin: 0px 5% 3% 0;
     background: rgba(242, 246, 255, 0.427);
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 10px;
     position: relative;
+    box-shadow: 2px 2px 2px 1px gray;
   }
-  
-  /* .content-box .content-container:hover {
-    animation: updown;
-    animation-duration : .5s;
-  } */
 
   .content-box .memo-color {
     width: 20px;
@@ -56,6 +42,15 @@
     font-weight : 900;
     position: absolute;
     left: 50px;
+}
+
+.content-container .subtitle {
+  position: absolute;
+  top: 70px;
+  left: 15px;
+  border-radius: 2px;
+  padding: 5px;
+  background-color: rgba(167, 166, 166, 0.373);
 }
   
   .content-box p {
@@ -80,6 +75,11 @@
     display : flex;
     border-top: 1px solid rgb(192, 188, 188);
     align-items : center;
+}
+
+.content-container .memo-menu p {
+  margin-left: 15px;
+  color: gray;
 }
 
 .content-container .memo-menu .fa-trash-can {

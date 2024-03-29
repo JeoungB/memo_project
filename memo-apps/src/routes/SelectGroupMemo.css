@@ -1,0 +1,139 @@
+.select-container-out {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    background-color: rgb(182, 177, 177);
+    opacity: .5;
+}
+
+.select-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 500px;
+    z-index: 7;
+    border-radius: 5px;
+    border: 1px solid aqua;
+    background-color: white;
+    padding: 20px;
+}
+
+.select-contents {
+    height: 83%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: scroll;
+    padding: 5px;
+}
+
+.select-contents::-webkit-scrollbar {
+    display: none;
+  }
+
+  .select-contents {
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+  }
+
+.select-container {
+    width: 48%;
+    height: 150px;
+    position: relative;
+    top: 10px;
+    left: 0;
+    background: rgba(242, 246, 255, 0.819);
+    box-shadow: 2px 2px 2px 1px gray;
+    margin-bottom: 45px;
+    border-radius: 5px;
+}
+
+.select-contents .memo-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid black;
+    margin: 0 0 0 10px;
+    position: relative;
+    top: 25px;
+  }
+
+  .select-container .subtitle {
+    position: absolute;
+    top: 70px;
+    left: 15px;
+    border-radius: 2px;
+    padding: 5px;
+    background-color: rgba(167, 166, 166, 0.373);
+  }
+
+  .select {
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .select-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    border-top: 1px solid rgba(128, 128, 128, 0.474);
+    background-color: rgb(254, 255, 255);
+    display: flex;
+  }
+
+  .select-bottom button {
+    position: relative;
+    top: 50%;
+    left: 32%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    margin: 0 10px 0 10px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: capitalize;
+  }
+
+  .select-bottom .add-memo {
+    background-color: aqua;
+  }
+
+  .select-bottom .add-memo:hover {
+    background-color: rgba(0, 255, 255, 0.392);
+  }
+
+  .select-bottom .cancel:hover {
+    background-color: rgba(213, 207, 207, 0.411);
+  }
+
+  .check {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8;
+    backdrop-filter: blur(1px);
+    background-color: rgba(172, 199, 199, 0.082);
+  }
+
+  .check img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+  }
+
+  .select-memo-menu {
+    cursor: pointer;
+  }

@@ -11,16 +11,15 @@ import { importantMemo } from "../store";
 
 const HomePage = () => {
 
-    let memoList = useSelector((state) => state.memo);
+    const memoList = useSelector((state) => state.memo);
     let dispatch = useDispatch();
     let navigate = useNavigate();
 
     const handleImportant = (id) => {
       dispatch(importantMemo(id));
-      // 리덕스에 클릭한 메모 id 보내고 important 바꾸고 map에서 important 상태에 따라 별 이미지 바꾸기
     }
 
-    //console.log(memoList);
+    //console.log(sessionStorage.getItem('memo'));
 
     return(
         <div className="homepage">
@@ -37,11 +36,12 @@ const HomePage = () => {
                       memoList.map((memoList) => {
                         return <div className="content-container" key={memoList.id}>
                         <div className="content" onClick={() => {navigate(`/content/${memoList.id}`)}}>
-                          <div className="memo-color"></div>
+                          <div className="memo-color" style={{backgroundColor : `${memoList.color}`}}></div>
                           <h2>{memoList.title}</h2>
-                          {/* 메모 터치 빨간 영역 조절. importnat true 면 별 노란색 */}
+                          <div className="subtitle">{memoList.subTitle}</div>
                           </div>
                           <div className="memo-menu">
+                          <p>{memoList.date}</p>
                           <i className="fa-solid fa-trash-can"></i>
                           <i className="fa-solid fa-pen-to-square"></i>
                           <div className="important">

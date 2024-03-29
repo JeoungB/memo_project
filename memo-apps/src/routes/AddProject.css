@@ -11,22 +11,43 @@
 
 .modal {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 35vw;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    border: 2px solid rgb(80, 236, 236);
+    z-index: 7;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+}
+
+.fadein {
+    position: absolute;
     top: 50%;
     left: 50%;
     width: 50%;
     height: 35vw;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
-    border: 2px solid blue;
-    z-index: 7;
-    background-color: rgb(255, 255, 255);
+    transition: .5s;
+}
+
+.fadeout {
+    position: absolute;
+    top: 1000px;
+    left: 50%;
+    width: 50%;
+    height: 35vw;
+    transform: translate(-50%, -50%);
+    transition: .5s;
 }
 
 .modal h1 {
     font-size: 30px;
     font-weight: 900;
     text-transform: capitalize;
-    color: rgb(55, 128, 196);
+    color: rgb(80, 236, 236);
     position: absolute;
     left: 50%;
     top: 15%;
@@ -60,19 +81,19 @@
     right: 0px;
     top: -2px;
     transform: translate(43%, -180%);
-    background-color: rgb(169, 188, 251);
+    background-color: rgb(179, 243, 243);
     text-align: center;
     line-height: 20px;
     border-radius: 10px;
     font-size: 1rem;
     animation: motion .5s linear 0s infinite alternate;
-    color: white;
+    color: rgb(14, 0, 0);
 }
 
 .modal .project-color-tag .notification .point {
     width: 0;
     height: 0;
-    border-top: 10px solid rgb(169, 188, 251);
+    border-top: 10px solid rgb(179, 243, 243);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     position: relative;
@@ -91,10 +112,13 @@
     width: 60%;
     height: 10%;
     margin-bottom: 30px;
+    border: none;
+    background-color: rgba(239, 237, 237, 0.586);
     outline: none;
     position: absolute;
     left: 50%;
     top: 40%;
+    border-radius: 10px;
     transform: translate(-50%, -50%);
 }
 
@@ -103,6 +127,9 @@
     height: 10%;
     margin-bottom: 30px;
     outline: none;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(239, 237, 237, 0.586);
     position: absolute;
     left: 50%;
     top: 60%;
@@ -146,16 +173,24 @@
     text-transform: capitalize;
 }
 
+.buttons .create {
+    background-color: rgb(179, 243, 243);
+    border: none;
+}
+
 
 .buttons .create:hover {
-    border-color: blue;
-    color: blue;
+    background-color: rgba(200, 248, 248, 0.747);
     cursor: pointer;
 }
 
+.buttons .cancel {
+    background-color: rgba(211, 209, 209, 0.618);
+    border: none;
+}
+
 .buttons .cancel:hover {
-    border-color: red;
-    color: red;
+    background-color: rgba(211, 209, 209, 0.395);
     cursor: pointer;
 }
 
