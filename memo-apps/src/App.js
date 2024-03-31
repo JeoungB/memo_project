@@ -17,6 +17,8 @@ import styled from "styled-components";
 import { setModal } from "./store";
 import GroupContents from "./routes/GroupContents";
 import SelectGroupMemo from './routes/SelectGroupMemo';
+import ModifyPage from "./routes/ModifyPage";
+import TodayPage from "./routes/TodayPage";
 
 let MenubarImg = styled.img`
 position: relative;
@@ -98,15 +100,17 @@ function App() {
             navigate('/');
           }}>
             <h2>
-              <img src={home} />
+              <img src={home} alt="메인 홈" />
               home
             </h2>
             <p>{memoList.length}</p>
           </div>
 
-          <div className="sidebar-menu today">
+          <div className="sidebar-menu today" onClick={() => {
+            navigate('/today');
+          }}>
             <h2>
-            <img src={calender} />
+            <img src={calender} alt="금일 생성된 메모" />
               today
             </h2>
             <p>0</p>
@@ -114,7 +118,7 @@ function App() {
 
           <div className="sidebar-menu important">
             <h2>
-            <img src={star} />
+            <img src={star} alt="중요한 메모" />
               important
             </h2>
             <p>0</p>
@@ -166,6 +170,8 @@ function App() {
       }>
         <Route path="/" element={<HomePage />} />
         <Route path="/write" element={<WritePage />} />
+        <Route path="/today" element={<TodayPage />} />
+        <Route path="/modify/:id" element={<ModifyPage />} />
         {/* content URL 파람에 선택한 제목도 같이 추가하기 group 도 */}
         <Route path="/group/:id" element={<GroupContents />} />
       <Route path="/content/:id" element={<ContentPage />} />

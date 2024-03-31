@@ -1,17 +1,18 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addMemo } from "../store";
+import { updateMemo } from "../store";
 import ReactQuill from "react-quill";
 import axios from "axios";
 import spinner from "../imgs/Rolling-1s-200px.gif"
 import "react-quill/dist/quill.snow.css";
 import "./write.css";
 
-const WritePage = () => {
-  const [title, setTitle] = useState("");
-  const [subTitle, setsubTitle] = useState("");
-  const [content, setContent] = useState("");
+const WritePage = (props) => {
+  const [title, setTitle] = useState(props.currentMemo.title);
+  const [subTitle, setsubTitle] = useState(props.currentMemo.subTitle);
+  const [content, setContent] = useState(props.currentMemo.content);
   const [loding, setLoding] = useState(false);
   const quillRef = useRef();
   let dispatch = useDispatch();
@@ -97,13 +98,34 @@ const WritePage = () => {
     navigates('/');
   };
 
+  const handleModify = (e) => {
+    e.preventDefault();
+
+    const today = new Date();
+    const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+    let newMemo = {
+      id : Date.now(),
+      title : title,
+      subTitle : subTitle,
+      content : content,
+      date : date,
+      important : false
+    }
+
+    dispatch(updateMemo([props.id, newMemo]));
+    
+    alert("수정되었습니다.");
+    navigates('/');
+  };
+
   return (
     <div className="writepage">
       <h2>Addmemo</h2>
       <div className="write-container">
         <div className="inputs">
-        <input type="text" name="title" placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}></input>
-        <input type="text" name="subTitle" placeholder="Memo Description" onChange={(e) => {setsubTitle(e.target.value)}}></input>
+        <input type="text" value={title} name="title" placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}></input>
+        <input type="text" value={subTitle} name="subTitle" placeholder="Memo Description" onChange={(e) => {setsubTitle(e.target.value)}}></input>
         </div>
         <div className="editor">
           <ReactQuill
@@ -136,7 +158,13 @@ const WritePage = () => {
             ) : null
           }
         </div>
-        <button className="submit" onClick={handleSubmit}>create</button>
+        {
+          props.id === undefined ? (
+            <button className="submit" onClick={handleSubmit}>create</button>
+          ) : (
+            <button className="submit modify" onClick={handleModify}>modify</button>
+          )
+        }
       </div>
     </div>
   );

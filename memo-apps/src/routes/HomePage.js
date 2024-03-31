@@ -49,8 +49,10 @@ const HomePage = () => {
                               dispatch(deleteMemo(memoList.id));
                             }
                           }}></i>
-                          {/* 메모 수정하기 할 차례 */}
-                          <i className="fa-solid fa-pen-to-square"></i>
+                          <i className="fa-solid fa-pen-to-square" onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/modify/${memoList.id}`);
+                          }}></i>
                           <div className="important">
                             {
                               memoList.important ? (

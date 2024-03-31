@@ -7,9 +7,9 @@ import { getDefaultMiddleware } from "@reduxjs/toolkit";
 let memo = createSlice({
     name : "memo",
     initialState : [
-        {id : 0, title : "영어 공부", content : "영어 단어 외우기", subTitle : "영어 단어 외우기", date : "2024-03-18", important : false, group : "", check : false, color : ""},
-        {id : 2, title : "운동", content : "매일 1시간씩", subTitle : "매일 1시간씩", date : "2024-03-20", important : false, group : "", check : false, color : ""},
-        {id : 3, title : "리액트 스터디", content : "리액트 공부 관련 메모", subTitle : "리액트 공부 관련 메모", date : "2024-03-25", important : false, group : "", check : false, color : ""}
+        {id : 0, title : "영어 공부", content : "영단어 리스트~~", subTitle : "영어 단어 외우기", date : "2024-03-18", important : false, group : "", check : false, color : ""},
+        {id : 2, title : "운동", content : "팔굽혀펴기, 딥스", subTitle : "매일 1시간씩", date : "2024-03-20", important : false, group : "", check : false, color : ""},
+        {id : 3, title : "리액트 스터디", content : "라이프 사이클, 상태관리 등등", subTitle : "리액트 공부 관련 메모", date : "2024-03-25", important : false, group : "", check : false, color : ""}
     ],
     reducers : {
         addMemo(state, action) {
@@ -18,7 +18,10 @@ let memo = createSlice({
         },
 
         updateMemo(state, action) {
-
+            let newMemo = [...state];
+            let currentMemo = newMemo.findIndex((newMemo) => newMemo.id == action.payload[0]);
+            newMemo[currentMemo] = action.payload[1];
+            return newMemo;
         },
 
         deleteMemo(state, action) {
@@ -130,7 +133,7 @@ let selectModal = createSlice({
     }
 })
 
-export let { addMemo, deleteMemo, importantMemo, addGroupMemo, deleteGroupMemo, checkMemo, allDeleteGroupMemo } = memo.actions;
+export let { addMemo, deleteMemo, updateMemo, importantMemo, addGroupMemo, deleteGroupMemo, checkMemo, allDeleteGroupMemo } = memo.actions;
 export let { setModal } = modal.actions;
 export let { addGroup, deleteGroup } = groupMemo.actions;
 export let { setSelectModal } = selectModal.actions;
