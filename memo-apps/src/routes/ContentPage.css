@@ -91,4 +91,5 @@
 .viwer {
     position: relative;
     z-index: 6;
+    overflow: auto;
 }

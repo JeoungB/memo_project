@@ -56,7 +56,6 @@ const ContentPage = () => {
                         }
                       </div>
                     </div>
-                        {/* 뷰어 스크롤 추가. */}
                     <div className="viwer"
                     style={{width : "59vw", height : "55vh", border : "1px solid black", marginTop : "30px"}} 
                     dangerouslySetInnerHTML={{__html : DOMPurify.sanitize(currentItem.content)}}>

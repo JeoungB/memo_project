@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import star from "../imgs/star2.png";
 import yellowStar from "../imgs/yellow-star.png";
 import "./HomePage.css";
-import { importantMemo } from "../store";
+import { deleteMemo, importantMemo } from "../store";
 
 // 이미지 출저.
 // <a href="https://www.flaticon.com/kr/free-icons/" title="별 아이콘">별 아이콘  제작자: rizky adhitya pradana - Flaticon</a>
@@ -40,16 +40,27 @@ const HomePage = () => {
                           <h2>{memoList.title}</h2>
                           <div className="subtitle">{memoList.subTitle}</div>
                           </div>
-                          <div className="memo-menu">
+                          <div className="memo-menu" onClick={() => {navigate(`/content/${memoList.id}`)}}>
                           <p>{memoList.date}</p>
-                          <i className="fa-solid fa-trash-can"></i>
+                          <i className="fa-solid fa-trash-can" onClick={(e) => {
+                            e.stopPropagation();
+                            let result = window.confirm(`${memoList.title}을 삭제하시겠습니까?`);
+                            if(result) {
+                              dispatch(deleteMemo(memoList.id));
+                            }
+                          }}></i>
+                          {/* 메모 수정하기 할 차례 */}
                           <i className="fa-solid fa-pen-to-square"></i>
                           <div className="important">
                             {
                               memoList.important ? (
-                                <img alt="important-star" src={yellowStar} onClick={() => {handleImportant(memoList.id)}}/>
+                                <img alt="important-star" src={yellowStar} onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleImportant(memoList.id)}}/>
                               ) : (
-                                <img alt="important-star" src={star} onClick={() => {handleImportant(memoList.id)}}/>
+                                <img alt="important-star" src={star} onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleImportant(memoList.id)}}/>
                               )
                             }
                           </div>

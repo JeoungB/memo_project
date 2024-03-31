@@ -2,17 +2,21 @@ import './GroupContents.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom";
 import noneMemo from '../imgs/none-memo.png';
-import { setSelectModal } from '../store';
+import { allDeleteGroupMemo, setSelectModal } from '../store';
 import yellowStar from "../imgs/yellow-star.png";
 import star from "../imgs/star2.png";
 import gropOutIcon from "../imgs/group-out.png";
 import { importantMemo } from "../store";
+import { deleteGroupMemo } from '../store';
+import { deleteGroup } from '../store';
+import { useState } from 'react';
 
 const GroupContents = () => {
 
     const groupMemo = useSelector((state) => state.groupMemo);
     const selectModal = useSelector((state) => state.selectModal);
     const memoList = useSelector((state) => state.memo);
+    const [menubar, setmenubar] = useState(false);
     let {id} = useParams();
     let dispatch = useDispatch();
     let navigate = useNavigate();
@@ -30,9 +34,25 @@ const GroupContents = () => {
                   <h2>{currentGroup.title}</h2>
                   <div className="tag">
                     <p>{currentGroup.subTitle}</p>
-                    <p className="addmemo" onClick={() => {
-                      dispatch(setSelectModal(true));
-                    }}>+ Add Group</p>
+                    <div className='addmemo group-menus' onClick={() => {setmenubar(!menubar)}}> . . .
+                    {
+                      menubar ? (
+                        <div className='menus-container'>
+                        <div className="addmemo group-addmemo" onClick={(e) => {
+                          dispatch(setSelectModal(true));
+                        }}>메모 추가</div>
+                        <div className="addmemo delete-group" onClick={(e) => {
+                          let result = window.confirm(`${currentGroup.title} 그룹을 삭제하시겠습니까?`);
+                          if(result) {
+                            navigate('/');
+                           dispatch(deleteGroup(currentGroup.id));
+                          dispatch(allDeleteGroupMemo(currentGroup.id));
+                          }
+                        }}>그룹 삭제</div>
+                        </div>
+                      ) : null
+                    }
+                    </div>
                   </div>
 
                   <div className="content-box">
@@ -55,9 +75,9 @@ const GroupContents = () => {
                             <h2>{groupMemos.title}</h2>
                             <p className='group-out' onClick={(e) => {
                               e.stopPropagation();
-                              let result = window.confirm("메모를 그룹에서 삭제하시겠습니까?");
+                              let result = window.confirm(`${groupMemos.title} 메모를 ${currentGroup.title}에서 삭제하시겠습니까?`);
                               if(result) {
-                                console.log("그룹에서 삭제")
+                                dispatch(deleteGroupMemo(groupMemos.id));
                               }
                             }}>
                               <img src={gropOutIcon} alt='그룹에서 삭제' />

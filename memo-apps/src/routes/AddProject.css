@@ -13,14 +13,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
-    height: 35vw;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    border: 2px solid rgb(80, 236, 236);
     z-index: 7;
     background-color: rgb(255, 255, 255);
-    overflow: hidden;
 }
 
 .fadein {
@@ -28,7 +24,7 @@
     top: 50%;
     left: 50%;
     width: 50%;
-    height: 35vw;
+    height: 500px;
     transform: translate(-50%, -50%);
     transition: .5s;
 }
@@ -37,10 +33,11 @@
     position: absolute;
     top: 1000px;
     left: 50%;
-    width: 50%;
-    height: 35vw;
+    width: 0;
+    height: 0;
     transform: translate(-50%, -50%);
     transition: .5s;
+    overflow: hidden;
 }
 
 .modal h1 {
@@ -159,7 +156,7 @@
     left: 18.5%;
     top: 75%;
     width: 63.5%;
-    height: 4vw;
+    height: 55px;
     display: flex;
     justify-content: space-between;
 }

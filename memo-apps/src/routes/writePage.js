@@ -98,8 +98,6 @@ const WritePage = () => {
   };
 
   return (
-    // 메모 태그
-    // 파일 첨부
     <div className="writepage">
       <h2>Addmemo</h2>
       <div className="write-container">
@@ -138,7 +136,7 @@ const WritePage = () => {
             ) : null
           }
         </div>
-        <button className="submit" onClick={handleSubmit}>submit</button>
+        <button className="submit" onClick={handleSubmit}>create</button>
       </div>
     </div>
   );
