@@ -85,6 +85,13 @@ let memo = createSlice({
                     }
                 };
             });
+        },
+
+        canleCheck(state, action) {
+            for(let i = 0 ; i < action.payload.length ; i++) {
+                let result = state.find((state) => state.id == action.payload[i]);
+                result.check = false;
+            };
         }
     }
 });
@@ -133,7 +140,7 @@ let selectModal = createSlice({
     }
 })
 
-export let { addMemo, deleteMemo, updateMemo, importantMemo, addGroupMemo, deleteGroupMemo, checkMemo, allDeleteGroupMemo } = memo.actions;
+export let { addMemo, deleteMemo, updateMemo, importantMemo, addGroupMemo, deleteGroupMemo, checkMemo, allDeleteGroupMemo, canleCheck } = memo.actions;
 export let { setModal } = modal.actions;
 export let { addGroup, deleteGroup } = groupMemo.actions;
 export let { setSelectModal } = selectModal.actions;

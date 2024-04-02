@@ -19,6 +19,7 @@ import GroupContents from "./routes/GroupContents";
 import SelectGroupMemo from './routes/SelectGroupMemo';
 import ModifyPage from "./routes/ModifyPage";
 import TodayPage from "./routes/TodayPage";
+import ImportantMemoPage from "./routes/ImportantMemoPage";
 
 let MenubarImg = styled.img`
 position: relative;
@@ -28,18 +29,21 @@ cursor: pointer;
 transition-duration: .5s;
 `;
 
-let ProjectList = styled.div`
+let Category = styled.div`
 width: 100%;
-position: relative;
-top: 20px;
-padding-left: 60px;
-background-color: blue;
+height: ${props => props.$categoryHeight}px;
+position: absolute;
+top: 45px;
+overflow: hidden;
+transition: .4s;
+overflow : auto;
 `;
 
 function App() {
 
-  const [menubarImg, setMenubarImg] = useState(-90);
-  const [imgToggle, setimgToggle] = useState(false);
+  const [menubarImg, setMenubarImg] = useState(0);
+  const [categoryHeight, setCategoryHeight] = useState();
+  const [imgToggle, setimgToggle] = useState(true);
   const body = document.querySelector('body');
   const memoList = useSelector((state) => state.memo);
   const modalState = useSelector((state) => state.modal);
@@ -47,9 +51,22 @@ function App() {
   const selectModal = useSelector((state) => state.selectModal);
   let navigate = useNavigate();
   let dispatch = useDispatch();
+  let day = new Date();
+  let today = day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDay();
+  let todayMemo = memoList.filter((memoList) => memoList.date === today);
+  let importantMemos = memoList.filter((memoList) => memoList.important === true);
 
-  // let memos = JSON.parse(sessionStorage.getItem('persist:memo')).memo;
-  // console.log(memos)
+  console.log(groupMemo.length);
+
+  useEffect(() => {
+    if(imgToggle === false) {
+      setCategoryHeight(0);
+    }
+
+    if(imgToggle === true) {
+      setCategoryHeight("300");
+    }
+  }, [imgToggle]);
 
   useEffect(() => {
     if(modalState === true) {
@@ -113,26 +130,28 @@ function App() {
             <img src={calender} alt="금일 생성된 메모" />
               today
             </h2>
-            <p>0</p>
+            <p>{todayMemo.length}</p>
           </div>
 
-          <div className="sidebar-menu important">
+          <div className="sidebar-menu important" onClick={() => {
+            navigate('/important');
+          }}>
             <h2>
             <img src={star} alt="중요한 메모" />
               important
             </h2>
-            <p>0</p>
+            <p>{importantMemos.length}</p>
           </div>
           <div className="line"></div>
           <div className="sidebar-menu projects">
             <MenubarImg $menubarImg={menubarImg} src={arrow} onClick={() => {
               setimgToggle(!imgToggle);
             }}></MenubarImg>
-            <h2>groupMemos</h2>
+            <h2>category</h2>
             <p className="add-project" onClick={() => {
               dispatch(setModal(true));
             }}>+</p>
-
+            <Category $categoryHeight={categoryHeight} className="category">
             {
               groupMemo.map((groupMemo) => {
                 return <div className="projects-list" key={groupMemo.id} onClick={() => {
@@ -143,6 +162,7 @@ function App() {
               </div>
               })
             }
+            </Category>
 
           </div>
         </div>
@@ -171,6 +191,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/write" element={<WritePage />} />
         <Route path="/today" element={<TodayPage />} />
+        <Route path="/important" element={<ImportantMemoPage />} />
         <Route path="/modify/:id" element={<ModifyPage />} />
         {/* content URL 파람에 선택한 제목도 같이 추가하기 group 도 */}
         <Route path="/group/:id" element={<GroupContents />} />

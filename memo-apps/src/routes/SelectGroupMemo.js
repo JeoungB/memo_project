@@ -4,7 +4,7 @@ import star from "../imgs/star2.png";
 import yellowStar from "../imgs/yellow-star.png";
 import checkIcon from "../imgs/check-icon.png";
 import { useState } from "react";
-import { addGroupMemo, checkMemo, setSelectModal } from "../store";
+import { addGroupMemo, checkMemo, setSelectModal, canleCheck } from "../store";
 import { useParams } from "react-router-dom";
 
 const SelectGroupMemo = () => {
@@ -63,12 +63,20 @@ const SelectGroupMemo = () => {
                     }}>add</button>
                     <button className="cancel" onClick={() => {
                         dispatch(setSelectModal(false));
+                        let cancleMemo = noneGoupMemos.filter((noneGoupMemos) => {
+                            return noneGoupMemos.group === "" && noneGoupMemos.check === true
+                        });
+                        let cancleMemoId = [];
+                        cancleMemo.forEach(element => {
+                            cancleMemoId.push(element.id);
+                        });
+                        dispatch(canleCheck(cancleMemoId));
                     }}>cancel</button>
                 </div>
             </div>
 
             <div className="select-container-out" onClick={() => {
-                console.log("dd")
+                dispatch(setSelectModal(false));
             }}></div>
         </div>
     )

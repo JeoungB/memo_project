@@ -1,0 +1,38 @@
+.today .main h2 {
+    position: relative;
+    left: -20px;
+}
+
+.today .main h2 {
+    pointer-events: none;
+}
+
+.today .main .tag {
+    pointer-events: none;
+}
+
+.today .content-box h2 {
+    position: relative;
+    left: 30px;
+}
+
+.today .content-box {
+    height: 0;
+}
+
+.today .content-box:hover {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.today .main .addmemo {
+    display: none;
+}
+
+.today .homepage {
+    height: 0;
+}
+
+.today .content h2 {
+    text-transform: none;
+}

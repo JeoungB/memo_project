@@ -10,13 +10,23 @@ import "react-quill/dist/quill.snow.css";
 import "./write.css";
 
 const WritePage = (props) => {
-  const [title, setTitle] = useState(props.currentMemo.title);
-  const [subTitle, setsubTitle] = useState(props.currentMemo.subTitle);
-  const [content, setContent] = useState(props.currentMemo.content);
+  const [title, setTitle] = useState("");
+  const [subTitle, setsubTitle] = useState("");
+  const [content, setContent] = useState("");
   const [loding, setLoding] = useState(false);
   const quillRef = useRef();
   let dispatch = useDispatch();
   let navigates = useNavigate();
+
+  useEffect(() => {
+    if(props.currentMemo !== undefined) {
+      setTitle(props.currentMemo.title);
+      setsubTitle(props.currentMemo.subTitle);
+      setContent(props.currentMemo.content);
+    }
+  }, []);
+
+
 
   const imageHandler = () => {
     // 이미지 삽입 할 input 생성.
@@ -89,7 +99,10 @@ const WritePage = (props) => {
       subTitle : subTitle,
       content : content,
       date : date,
-      important : false
+      important : false,
+      group : "",
+      check : false,
+      color : ""
     }
 
     dispatch(addMemo(newMemo));
@@ -110,7 +123,10 @@ const WritePage = (props) => {
       subTitle : subTitle,
       content : content,
       date : date,
-      important : false
+      important : false,
+      group : "",
+      check : false,
+      color : ""
     }
 
     dispatch(updateMemo([props.id, newMemo]));
