@@ -1,3 +1,16 @@
 .important-memo-page .addmemo {
     display: none;
 }
+
+.important-memo-page .alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-25%, -25%);
+    width: 50%;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+    font-size: 26px;
+    pointer-events: none;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import star from "../imgs/star2.png";
@@ -37,6 +37,10 @@ const HomePage = (props) => {
         setMemo(props.importantMemos);
         setTitle("Important");
         setSubTitle("Important Memos");
+      }
+
+      if(props.title !== undefined) {
+        setTitle(props.title);
       }
     }, [memoList]);
 

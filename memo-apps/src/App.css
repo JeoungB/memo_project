@@ -175,10 +175,21 @@ body {
   z-index: 3;
 }
 
+.search-img {
+  width: 60px;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  border-left: 1px solid rgba(128, 128, 128, 0.452);
+}
+
 .search img {
   height: 15px;
-  margin-left: 10px;
-  background-size: contain;
+  position: relative;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  background-size: cover;
 }
 
 .search input {
@@ -189,6 +200,14 @@ body {
   margin-left: 10px;
   background-color: transparent;
 }
+
+/* .search .search-find {
+  cursor: pointer;
+  width: 50px;
+  height: 100%;
+  line-height: 40px;
+  border-left: 1px solid black;
+} */
 
 .main {
   margin : -73px 0 0 30px;

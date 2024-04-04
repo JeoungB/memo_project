@@ -138,33 +138,36 @@ let selectModal = createSlice({
             return state;
         }
     }
-})
+});
+
+let searchMemos = createSlice({
+    name : "searchMemos",
+    initialState : {value : ""},
+    reducers : {
+        changeSearch(state, action) {
+            state.value = action.payload;
+        }
+    }
+});
 
 export let { addMemo, deleteMemo, updateMemo, importantMemo, addGroupMemo, deleteGroupMemo, checkMemo, allDeleteGroupMemo, canleCheck } = memo.actions;
 export let { setModal } = modal.actions;
 export let { addGroup, deleteGroup } = groupMemo.actions;
 export let { setSelectModal } = selectModal.actions;
-
-// export default configureStore({
-//   reducer: {
-//     memo : memo.reducer,
-//     modal : modal.reducer,
-//     groupMemo : groupMemo.reducer,
-//     selectModal : selectModal.reducer
-//    }
-// });
+export let { changeSearch } = searchMemos.actions;
 
 const reducers = combineReducers({
     memo : memo.reducer,
     modal : modal.reducer,
     groupMemo : groupMemo.reducer,
-    selectModal : selectModal.reducer
+    selectModal : selectModal.reducer,
+    searchMemos : searchMemos.reducer
 });
 
 const persistConfig = {
     key : 'memo',
     storage : sessionStorage,
-    whitelist : ['memo', 'groupMemo']
+    whitelist : ['memo', 'groupMemo', 'searchMemos']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

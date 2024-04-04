@@ -10,6 +10,11 @@ const ImportantMemoPage = () => {
     return(
         <div className="important-memo-page">
             <HomePage importantMemos={importantMemos} />
+
+            {
+                Array.isArray(importantMemos) && importantMemos.length === 0 ?
+                    <div className="alert">중요 메모가 없습니다.</div> : null
+            }
         </div>
     )
 };

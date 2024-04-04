@@ -15,11 +15,13 @@ import AddProject from "./routes/AddProject";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { setModal } from "./store";
+import { changeSearch } from "./store";
 import GroupContents from "./routes/GroupContents";
 import SelectGroupMemo from './routes/SelectGroupMemo';
 import ModifyPage from "./routes/ModifyPage";
 import TodayPage from "./routes/TodayPage";
 import ImportantMemoPage from "./routes/ImportantMemoPage";
+import SearchPage from "./routes/SearchPage";
 
 let MenubarImg = styled.img`
 position: relative;
@@ -44,8 +46,10 @@ function App() {
   const [menubarImg, setMenubarImg] = useState(0);
   const [categoryHeight, setCategoryHeight] = useState();
   const [imgToggle, setimgToggle] = useState(true);
+  const [search, setSearch] = useState("");
   const body = document.querySelector('body');
   const memoList = useSelector((state) => state.memo);
+  const searchDatas = useSelector((state) => state.searchMemos);
   const modalState = useSelector((state) => state.modal);
   const groupMemo = useSelector((state) => state.groupMemo);
   const selectModal = useSelector((state) => state.selectModal);
@@ -55,8 +59,6 @@ function App() {
   let today = day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDay();
   let todayMemo = memoList.filter((memoList) => memoList.date === today);
   let importantMemos = memoList.filter((memoList) => memoList.important === true);
-
-  console.log(groupMemo.length);
 
   useEffect(() => {
     if(imgToggle === false) {
@@ -169,8 +171,21 @@ function App() {
 
         <div className="content-container">
           <div className="search">
+            <input type="text" name="search" placeholder="  Search" onChange={(e) => {
+              setSearch(e.target.value);
+              }}/>
+            <div className="search-img" onClick={() => {
+              if(search !== null && search) {
+                dispatch(changeSearch(search));
+                navigate(`/search/${search}`);
+              }
+
+              if(!search) {
+                navigate('/');
+              }
+            }}>
             <img src={searchIcon}></img>
-            <input type="text" name="search" placeholder="Search" />
+            </div>
           </div>
         </div>
         </div>
@@ -192,6 +207,7 @@ function App() {
         <Route path="/write" element={<WritePage />} />
         <Route path="/today" element={<TodayPage />} />
         <Route path="/important" element={<ImportantMemoPage />} />
+        <Route path={`/search/${searchDatas.value}`} element={<SearchPage search={search} />} />
         <Route path="/modify/:id" element={<ModifyPage />} />
         {/* content URL 파람에 선택한 제목도 같이 추가하기 group 도 */}
         <Route path="/group/:id" element={<GroupContents />} />

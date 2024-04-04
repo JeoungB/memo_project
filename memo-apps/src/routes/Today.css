@@ -36,3 +36,16 @@
 .today .content h2 {
     text-transform: none;
 }
+
+.today .alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-25%, -25%);
+    width: 50%;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+    font-size: 26px;
+    pointer-events: none;
+}
