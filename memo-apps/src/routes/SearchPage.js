@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
 import HomePage from "./HomePage";
 import { useSelector } from "react-redux";
+import './SearchPage.css';
 
 const SearchPage = () => {
 
@@ -11,12 +11,14 @@ const SearchPage = () => {
         return memoList.title.indexOf(searchDatas.value) > -1;
     });
 
-    // 이제 검색 페이지에 데이터 넘겨줘서 쓰면 됨.
-    // 검색 창에서 엔터 치면 검색되는것도
-
     return(
         <div className="searchpage">
-            <HomePage title="search" />
+            <HomePage searchData={searchData} />
+            {
+                Array.isArray(searchData) && searchData.length === 0 ? (
+                    <div className="alert">"{searchDatas.value}" 에 대한 메모가 없어요!</div>
+                ) : null
+            }
         </div>
     )
 };

@@ -12,6 +12,7 @@ import { deleteMemo, importantMemo } from "../store";
 const HomePage = (props) => {
 
     const memoList = useSelector((state) => state.memo);
+    const searchDatas = useSelector((state) => state.searchMemos);
     const [memo, setMemo] = useState(memoList);
     const [title, setTitle] = useState("Home");
     const [subTitle, setSubTitle] = useState("Memos");
@@ -38,18 +39,28 @@ const HomePage = (props) => {
         setTitle("Important");
         setSubTitle("Important Memos");
       }
-
-      if(props.title !== undefined) {
-        setTitle(props.title);
-      }
     }, [memoList]);
+
+    useLayoutEffect(() => {
+      if(Array.isArray(props.searchData) && props.searchData.lenght !== 0) {
+        setMemo(props.searchData);
+        setTitle("Search");
+        setSubTitle(searchDatas.value);
+      }
+    }, [searchDatas.value]);
 
     return(
         <div className="homepage">
-                          <div className="main">
+              <div className="main">
                 <h2>{title}</h2>
                 <div className="tag">
-                  <p>{subTitle}</p>
+                  {
+                    props.searchData !== undefined ? (
+                      <p>"{subTitle}" 에 대한 검색 결과</p>
+                    ) : (
+                      <p>{subTitle}</p>
+                    )
+                  }
                   <p className="addmemo" onClick={() => {
                     navigate('/write');
                   }}>+ Addmemo</p>

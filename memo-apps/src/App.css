@@ -114,19 +114,18 @@ body {
 }
 
 .category::-webkit-scrollbar {
-  display: none;
+  width: 8px;
 }
 
-.category {
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
+.category::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgb(157, 154, 154);
 }
 
 .projects .projects-list {
   height: 30px;
   overflow: hidden;
   position: relative;
-  /* top: 15px; */
   text-overflow: ellipsis;
   line-height: 30px;
   white-space: nowrap; /* 공백문자가 있다면 줄바꿈 안하고 한줄로 나오게함 */

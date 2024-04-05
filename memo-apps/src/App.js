@@ -33,7 +33,7 @@ transition-duration: .5s;
 
 let Category = styled.div`
 width: 100%;
-height: ${props => props.$categoryHeight}px;
+height: ${props => props.$categoryHeight}vh;
 position: absolute;
 top: 45px;
 overflow: hidden;
@@ -66,7 +66,7 @@ function App() {
     }
 
     if(imgToggle === true) {
-      setCategoryHeight("300");
+      setCategoryHeight("30");
     }
   }, [imgToggle]);
 
@@ -99,6 +99,15 @@ function App() {
       setMenubarImg(0);
     }
   }, [imgToggle]);
+
+  const enterKey = (e) => {
+    if(e.key === "Enter" && search !== null && search) {
+      dispatch(changeSearch(search));
+      navigate(`/search/${search}`);
+    }
+  }
+
+  console.log(search)
 
   return (
     <div className="App">
@@ -171,7 +180,7 @@ function App() {
 
         <div className="content-container">
           <div className="search">
-            <input type="text" name="search" placeholder="  Search" onChange={(e) => {
+            <input type="text" name="search" placeholder="&nbsp;&nbsp;Search" onKeyDown={(e) => enterKey(e)} onChange={(e) => {
               setSearch(e.target.value);
               }}/>
             <div className="search-img" onClick={() => {
