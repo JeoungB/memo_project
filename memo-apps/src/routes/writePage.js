@@ -11,10 +11,13 @@ import "./write.css";
 
 const WritePage = (props) => {
   const [title, setTitle] = useState("");
+  const [titleWarning, setTitleWarning] = useState(false);
   const [subTitle, setsubTitle] = useState("");
+  const [subtitleWarning, setSubTitleWarning] = useState(false);
   const [content, setContent] = useState("");
   const [loding, setLoding] = useState(false);
   const quillRef = useRef();
+  const TEXT_LENGHT = /^.{0,10}$/ 
   let dispatch = useDispatch();
   let navigates = useNavigate();
 
@@ -93,6 +96,23 @@ const WritePage = (props) => {
     const today = new Date();
     const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
+    if(!title.trim()) {
+      setTitleWarning(true);
+
+      return 0;
+    }
+
+    if(!title.match(TEXT_LENGHT)) {
+      setTitleWarning(true);
+      return 0;
+    }
+
+    if(!subTitle.match(TEXT_LENGHT)) {
+      setSubTitleWarning(true);
+
+      return 0;
+    }
+
     let newMemo = {
       id : Date.now(),
       title : title,
@@ -140,8 +160,18 @@ const WritePage = (props) => {
       <h2>Addmemo</h2>
       <div className="write-container">
         <div className="inputs">
-        <input type="text" value={title} name="title" placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}></input>
-        <input type="text" value={subTitle} name="subTitle" placeholder="Memo Description" onChange={(e) => {setsubTitle(e.target.value)}}></input>
+          {
+            titleWarning ? (
+              <p className="inputs-p1">*제목을 작성해 주세요 (공백X, 10자 이내)</p>
+            ) : null
+          }
+        <input type="text" value={title} name="title" placeholder="제목을 작성해 주세요 (1 ~ 10자)" onChange={(e) => {setTitle(e.target.value)}}></input>
+        {
+          subtitleWarning ? (
+            <p className="inputs-p2">10자 이내</p>
+          ) : null
+        }
+        <input type="text" value={subTitle} name="subTitle" placeholder="메모에 대한 설명을 적어주세요 (0 ~ 10자)" onChange={(e) => {setsubTitle(e.target.value)}}></input>
         </div>
         <div className="editor">
           <ReactQuill

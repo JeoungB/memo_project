@@ -9,6 +9,30 @@
     top : 175px;
 }
 
+.main .scroll-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.main .scroll-button img {
+  width: 50px;
+  height: 50px;
+}
+
+.main span {
+  display: inline-block;
+  max-width: 60%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .content-box {
     width: 100%;
     margin-top: 30px;
@@ -103,5 +127,7 @@
 .content-container .memo-menu .important img {
   width: 100%;
 }
+
+
 
 

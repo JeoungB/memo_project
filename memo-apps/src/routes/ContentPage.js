@@ -34,9 +34,8 @@ const ContentPage = () => {
                         {
                           menu ? (
                             <>
-                               <div className="menu">
+                            <div className="menu">
                             <p className="delete" onClick={(e) => {
-                            e.stopPropagation();
                             let result = window.confirm("해당 메모를 삭제하시겠습니까?");
                             if(result) {
                               dispatch(deleteMemo(currentItem.id));
@@ -48,9 +47,11 @@ const ContentPage = () => {
                               setMenu(false);
                             }
                             }}>삭제</p>
-                            <p className="modify">수정</p>
+
+                            <p className="modify" onClick={() => {
+                              navigate(`/modify/${currentItem.id}`);
+                            }}>수정</p>
                         </div>
-                        <div className="menu-point"></div>
                             </>
                           ) : null
                         }

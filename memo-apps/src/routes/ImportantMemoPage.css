@@ -4,7 +4,7 @@
 
 .important-memo-page .alert {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-25%, -25%);
     width: 50%;
@@ -13,4 +13,14 @@
     line-height: 200px;
     font-size: 26px;
     pointer-events: none;
+}
+
+.important-memo-page .alert .not-important {
+    width: 120px;
+    height: 120px;
+}
+
+.important-memo-page .alert p {
+    position: relative;
+    top: -150px;
 }

@@ -57,35 +57,32 @@
     width : 50px;
     height : 78px;
     position : absolute;
-    top : 40px;
+    top : 35px;
     left: -11.5px;
     text-align : center;
     z-index: 9;
     border-radius: 5px;
+    overflow: hidden;
     background-color : rgb(244, 244, 244);
+    box-shadow: 2px 2px 2px gray;
 }
 
 .menu .delete {
     padding : 15px 0 10px 0;
-    border-bottom : 1px solid black;
     cursor : pointer;
+}
+
+.menu .delete:hover {
+    color: black
 }
 
 .menu .modify {
     padding : 10px 0 10px 0;
-    border-bottom : 1px solid black;
     cursor : pointer;
 }
 
-.menu-point {
-    width : 25px;
-    height : 25px;
-    position : absolute;
-    top : 30px;
-    left: 0px;
-    z-index: 2;
-    background-color : rgb(244, 244, 244);
-    transform : rotate(45deg);
+.menu .modify:hover {
+    color: black
 }
 
 .viwer {

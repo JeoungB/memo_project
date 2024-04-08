@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import star from "../imgs/star2.png";
 import yellowStar from "../imgs/yellow-star.png";
 import "./HomePage.css";
+import scrollTopIcon from "../imgs/scroll-top.png";
 import { deleteMemo, importantMemo } from "../store";
-
-// 이미지 출저.
-// <a href="https://www.flaticon.com/kr/free-icons/" title="별 아이콘">별 아이콘  제작자: rizky adhitya pradana - Flaticon</a>
 
 const HomePage = (props) => {
 
@@ -16,8 +14,21 @@ const HomePage = (props) => {
     const [memo, setMemo] = useState(memoList);
     const [title, setTitle] = useState("Home");
     const [subTitle, setSubTitle] = useState("Memos");
+    const [scrollModal, setScrollModal] = useState(false);
     let dispatch = useDispatch();
     let navigate = useNavigate();
+
+    window.addEventListener('scroll', function() {
+      let scroll = this.scrollY;
+  
+      if(scroll > 180) {
+        setScrollModal(true);
+      }
+
+      if(scroll < 180) {
+        setScrollModal(false);
+      }
+    });
 
     const handleImportant = (id) => {
       dispatch(importantMemo(id));
@@ -56,7 +67,7 @@ const HomePage = (props) => {
                 <div className="tag">
                   {
                     props.searchData !== undefined ? (
-                      <p>"{subTitle}" 에 대한 검색 결과</p>
+                      <p>"<span>{subTitle}</span>" 에 대한 검색 결과</p>
                     ) : (
                       <p>{subTitle}</p>
                     )
@@ -105,6 +116,15 @@ const HomePage = (props) => {
                     })
                   }
                 </div>
+                {
+                  scrollModal ? (
+                    <div className="scroll-button" onClick={() => {
+                      window.scroll(0 ,0);
+                    }}>
+                    <img src={scrollTopIcon} alt="스크롤 아이콘" />
+                  </div>
+                  ) : null
+                }
               </div>
         </div>
     )

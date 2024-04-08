@@ -1,4 +1,7 @@
 /* eslint-disable */
+
+// 이미지 출저.
+// <a href="https://www.flaticon.com/kr/free-icons/" title="별 아이콘">별 아이콘  제작자: rizky adhitya pradana - Flaticon</a>
 import "./App.css";
 import "./reset.css";
 import searchIcon from "./imgs/searchIcon.png";
@@ -16,6 +19,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { setModal } from "./store";
 import { changeSearch } from "./store";
+import { setDark } from "./store";
 import GroupContents from "./routes/GroupContents";
 import SelectGroupMemo from './routes/SelectGroupMemo';
 import ModifyPage from "./routes/ModifyPage";
@@ -53,12 +57,19 @@ function App() {
   const modalState = useSelector((state) => state.modal);
   const groupMemo = useSelector((state) => state.groupMemo);
   const selectModal = useSelector((state) => state.selectModal);
+  const darkMode = useSelector((state) => state.darkMode.value);
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let day = new Date();
-  let today = day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDay();
+  let today = day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate();
   let todayMemo = memoList.filter((memoList) => memoList.date === today);
   let importantMemos = memoList.filter((memoList) => memoList.important === true);
+
+  useEffect(() => {
+    if(darkMode) {
+      body.style.backgroundColor = '#2B2B2B';
+    }
+  }, [darkMode]);
 
   useEffect(() => {
     if(imgToggle === false) {
@@ -107,8 +118,6 @@ function App() {
     }
   }
 
-  console.log(search)
-
   return (
     <div className="App">
     <Routes>  
@@ -119,7 +128,9 @@ function App() {
         <h1 style={{
           textTransform : "uppercase"
         }}>memos</h1>
-        <p>화면 테마</p>
+        <p onClick={() => {
+          dispatch(setDark());
+        }}>화면 테마</p>
       </header>
 
       <div className="main-container">
@@ -158,7 +169,7 @@ function App() {
             <MenubarImg $menubarImg={menubarImg} src={arrow} onClick={() => {
               setimgToggle(!imgToggle);
             }}></MenubarImg>
-            <h2>category</h2>
+            <h2>Group</h2>
             <p className="add-project" onClick={() => {
               dispatch(setModal(true));
             }}>+</p>

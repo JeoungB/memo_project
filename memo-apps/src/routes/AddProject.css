@@ -11,33 +11,14 @@
 
 .modal {
     position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    z-index: 7;
-    background-color: rgb(255, 255, 255);
-}
-
-.fadein {
-    position: absolute;
     top: 50%;
     left: 50%;
     width: 50%;
     height: 500px;
     transform: translate(-50%, -50%);
-    transition: .5s;
-}
-
-.fadeout {
-    position: absolute;
-    top: 1000px;
-    left: 50%;
-    width: 0;
-    height: 0;
-    transform: translate(-50%, -50%);
-    transition: .5s;
-    overflow: hidden;
+    border-radius: 10px;
+    z-index: 7;
+    background-color: rgb(255, 255, 255);
 }
 
 .modal h1 {
@@ -53,51 +34,29 @@
 
 .modal .project-color-tag {
     position: absolute;
-    width: 2vw;
-    height: 2vw;
-    left: 78%;
-    top: 12.5%;
-    border-radius: 2vw;
-    border: 2px solid black;
+    width: 30px;
+    height: 30px;
+    left: 80%;
+    top: 64px;
+    border-radius: 30px;
+    border: 1px solid black;
     cursor: pointer;
 }
 
-@keyframes motion {
-    0% {
-        margin-top: 0px;
-    }
-    100% {
-        margin-top: 4px;
-    }
-}
-
-.modal .project-color-tag .notification {
-    width: 15vw;
-    height: 20px;
+.modal .palette {
     position: absolute;
-    right: 0px;
-    top: -2px;
-    transform: translate(43%, -180%);
-    background-color: rgb(179, 243, 243);
-    text-align: center;
-    line-height: 20px;
-    border-radius: 10px;
-    font-size: 1rem;
-    animation: motion .5s linear 0s infinite alternate;
-    color: rgb(14, 0, 0);
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
 }
 
-.modal .project-color-tag .notification .point {
-    width: 0;
-    height: 0;
-    border-top: 10px solid rgb(179, 243, 243);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    position: relative;
-    left: 50%;
-    top: -1px;
-    transform: translate(-50%, 0);
+.modal .palette img {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
 }
+
 
 .modal .color {
     position: relative;
@@ -138,6 +97,7 @@
     left: 20%;
     top: 30%;
     font-size: 1rem;
+    color: red;
 }
 
 .modal .modal-p1 span {
@@ -149,6 +109,7 @@
     left: 20%;
     top: 50%;
     font-size: 1rem;
+    color: red;
 }
 
 .buttons {

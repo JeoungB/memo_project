@@ -17,7 +17,23 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 30px;
+    margin-top: 40px;
+}
+
+.writepage .inputs .inputs-p1, .inputs-p2 {
+    color: red;
+    font-size: 16px;
+    position: absolute;
+}
+
+.writepage .inputs .inputs-p1 {
+    top: 50px;
+    left: 0;
+}
+
+.writepage .inputs .inputs-p2 {
+    top: 115px;
+    left: 0;
 }
 
 .writepage input {
@@ -25,7 +41,7 @@
     height: 30px;
     padding-left: 10px;
     outline: none;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .editor {

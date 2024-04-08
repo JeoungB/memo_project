@@ -1,6 +1,7 @@
 import HomePage from "./HomePage";
 import { useSelector } from "react-redux";
 import './SearchPage.css';
+import notFoundIcon from "../imgs/not-found.png";
 
 const SearchPage = () => {
 
@@ -16,7 +17,10 @@ const SearchPage = () => {
             <HomePage searchData={searchData} />
             {
                 Array.isArray(searchData) && searchData.length === 0 ? (
-                    <div className="alert">"{searchDatas.value}" 에 대한 메모가 없어요!</div>
+                    <div className="alert">
+                    <img className="search-icon" src={notFoundIcon} alt="찾을 수 없음 돋보기" />
+                    <p>해당 메모가 없습니다</p>
+                    </div>
                 ) : null
             }
         </div>

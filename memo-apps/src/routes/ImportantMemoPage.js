@@ -1,6 +1,7 @@
 import HomePage from "./HomePage";
 import { useSelector } from "react-redux";
 import './ImportantMemoPage.css';
+import notImportant from "../imgs/not-important.png";
 
 const ImportantMemoPage = () => {
 
@@ -13,7 +14,10 @@ const ImportantMemoPage = () => {
 
             {
                 Array.isArray(importantMemos) && importantMemos.length === 0 ?
-                    <div className="alert">중요 메모가 없습니다.</div> : null
+                    <div className="alert">
+                        <img className="not-important" src={notImportant} alt="중요 메모 없음 아이콘" />
+                        <p>중요 메모가 없습니다</p>
+                    </div> : null
             }
         </div>
     )

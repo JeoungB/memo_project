@@ -150,24 +150,36 @@ let searchMemos = createSlice({
     }
 });
 
+let darkMode = createSlice({
+    name : "darkMode",
+    initialState : {value : "false"},
+    reducers : {
+        setDark(state) {
+            state.value = !state.value;
+        }
+    }
+})
+
 export let { addMemo, deleteMemo, updateMemo, importantMemo, addGroupMemo, deleteGroupMemo, checkMemo, allDeleteGroupMemo, canleCheck } = memo.actions;
 export let { setModal } = modal.actions;
 export let { addGroup, deleteGroup } = groupMemo.actions;
 export let { setSelectModal } = selectModal.actions;
 export let { changeSearch } = searchMemos.actions;
+export let { setDark } = darkMode.actions;
 
 const reducers = combineReducers({
     memo : memo.reducer,
     modal : modal.reducer,
     groupMemo : groupMemo.reducer,
     selectModal : selectModal.reducer,
-    searchMemos : searchMemos.reducer
+    searchMemos : searchMemos.reducer,
+    darkMode : darkMode.reducer
 });
 
 const persistConfig = {
     key : 'memo',
     storage : sessionStorage,
-    whitelist : ['memo', 'groupMemo', 'searchMemos']
+    whitelist : ['memo', 'groupMemo', 'searchMemos', 'darkMode']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
