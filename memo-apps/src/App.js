@@ -215,7 +215,6 @@ function App() {
               if(search !== null && search) {
                 dispatch(changeSearch(search));
                 navigate(`/search/${search}`);
-                //d
               }
 
               if(!search) {
