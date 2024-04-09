@@ -9,6 +9,8 @@ import home from "./imgs/house-solid.svg";
 import calender from "./imgs/calender.svg";
 import star from "./imgs/star.svg";
 import arrow from "./imgs/arrow.svg";
+import sun from "./imgs/sun.png";
+import moon from "./imgs/moon.png";
 import WritePage from "./routes/writePage";
 import { Routes, Route, useNavigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -26,6 +28,7 @@ import ModifyPage from "./routes/ModifyPage";
 import TodayPage from "./routes/TodayPage";
 import ImportantMemoPage from "./routes/ImportantMemoPage";
 import SearchPage from "./routes/SearchPage";
+import NotFoundPage from "./routes/NotFoundPage";
 
 let MenubarImg = styled.img`
 position: relative;
@@ -41,7 +44,6 @@ height: ${props => props.$categoryHeight}vh;
 position: absolute;
 top: 45px;
 overflow: hidden;
-transition: .4s;
 overflow : auto;
 `;
 
@@ -57,7 +59,7 @@ function App() {
   const modalState = useSelector((state) => state.modal);
   const groupMemo = useSelector((state) => state.groupMemo);
   const selectModal = useSelector((state) => state.selectModal);
-  const darkMode = useSelector((state) => state.darkMode.value);
+  const darkMode = useSelector((state) => state.darkMode);
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let day = new Date();
@@ -66,8 +68,15 @@ function App() {
   let importantMemos = memoList.filter((memoList) => memoList.important === true);
 
   useEffect(() => {
-    if(darkMode) {
-      body.style.backgroundColor = '#2B2B2B';
+    if(darkMode === true) {
+      body.style.backgroundColor = "#2B2B2B";
+      body.style.color = "white";
+    }
+
+    if(darkMode === false) {
+      body.style.backgroundColor = "white";
+      body.style.color = "black";
+      body.style.transition = ".3s"
     }
   }, [darkMode]);
 
@@ -124,13 +133,21 @@ function App() {
       
       <Route path="/" element={ 
         <div>
-          <header className="header">
+          <header className="header" style={{backgroundColor : darkMode ? '#2B2B2B' : '', transition : '.3s'}}>
         <h1 style={{
           textTransform : "uppercase"
         }}>memos</h1>
-        <p onClick={() => {
+        <div className="darkmode" onClick={() => {
           dispatch(setDark());
-        }}>화면 테마</p>
+        }}>
+          {
+            darkMode ? (
+              <img className="moon" src={moon} alt="moon" />
+            ) : (
+              <img className="sun" src={sun} alt="sun" />
+            )
+          }
+        </div>
       </header>
 
       <div className="main-container">
@@ -191,7 +208,7 @@ function App() {
 
         <div className="content-container">
           <div className="search">
-            <input type="text" name="search" placeholder="&nbsp;&nbsp;Search" onKeyDown={(e) => enterKey(e)} onChange={(e) => {
+            <input type="text" name="search" placeholder="&nbsp;&nbsp;Search" style={{color : darkMode ? 'white' : ''}} onKeyDown={(e) => enterKey(e)} onChange={(e) => {
               setSearch(e.target.value);
               }}/>
             <div className="search-img" onClick={() => {
@@ -227,14 +244,14 @@ function App() {
         <Route path="/write" element={<WritePage />} />
         <Route path="/today" element={<TodayPage />} />
         <Route path="/important" element={<ImportantMemoPage />} />
-        <Route path={`/search/${searchDatas.value}`} element={<SearchPage search={search} />} />
+        <Route path={`/search/${searchDatas.value}`} element={<SearchPage />} />
         <Route path="/modify/:id" element={<ModifyPage />} />
         {/* content URL 파람에 선택한 제목도 같이 추가하기 group 도 */}
         <Route path="/group/:id" element={<GroupContents />} />
       <Route path="/content/:id" element={<ContentPage />} />
       </Route>
 
-      <Route path="/*" element={<div>없는 페이지</div>} />
+      <Route path="/*" element={<NotFoundPage />} />
       </Routes>
         </div>
   );

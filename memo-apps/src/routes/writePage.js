@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addMemo } from "../store";
 import { updateMemo } from "../store";
+import { useSelector } from "react-redux";
 import ReactQuill from "react-quill";
 import axios from "axios";
 import spinner from "../imgs/Rolling-1s-200px.gif"
@@ -16,6 +17,7 @@ const WritePage = (props) => {
   const [subtitleWarning, setSubTitleWarning] = useState(false);
   const [content, setContent] = useState("");
   const [loding, setLoding] = useState(false);
+  const darkMode = useSelector((state) => state.darkMode);
   const quillRef = useRef();
   const TEXT_LENGHT = /^.{0,10}$/ 
   let dispatch = useDispatch();
@@ -206,9 +208,9 @@ const WritePage = (props) => {
         </div>
         {
           props.id === undefined ? (
-            <button className="submit" onClick={handleSubmit}>create</button>
+            <button className="submit" style={{backgroundColor : darkMode ? 'transparent' : '', border : darkMode ? '1px solid white' : '', color : darkMode ? 'white' : ''}} onClick={handleSubmit}>create</button>
           ) : (
-            <button className="submit modify" onClick={handleModify}>modify</button>
+            <button className="submit modify" style={{backgroundColor : darkMode ? 'transparent' : '', border : darkMode ? '1px solid white' : '', color : darkMode ? 'white' : ''}} onClick={handleModify}>modify</button>
           )
         }
       </div>

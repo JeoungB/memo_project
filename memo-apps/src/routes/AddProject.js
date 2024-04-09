@@ -4,6 +4,7 @@ import { ChromePicker } from 'react-color';
 import { useDispatch } from "react-redux";
 import { addGroup, setModal } from "../store";
 import paletteIcon from "../imgs/palette-icon.png";
+import { useSelector } from "react-redux";
 
 const AddProject = () => {
 
@@ -14,6 +15,7 @@ const AddProject = () => {
     const [color, setColor] = useState('#');
     const [notification, setNotification] = useState(true);
     const [colorModal, setColorModal] = useState(false);
+    const darkMode = useSelector((state) => state.darkMode);
     const TEXT_LENGHT = /^.{0,20}$/ 
     let dispatch = useDispatch();
 
@@ -60,8 +62,8 @@ const AddProject = () => {
 
   return (
     <div className="AddProject">
-      <div className="modal">
-      <h1>new group</h1>
+      <div className="modal" style={{backgroundColor : darkMode ? '#2B2B2B' : ''}}>
+      <h1 style={{color : darkMode ? 'white' : ''}}>new group</h1>
       <div style={{backgroundColor : `${color}`}} className="project-color-tag" onClick={() => {
         setColorModal(!colorModal);
       }}>
@@ -85,7 +87,7 @@ const AddProject = () => {
           <p className="modal-p1"><span>*</span>그룹 제목을 작성해주세요 (공백X, 20자 이내)</p>
         ) : null
       }
-        <input className="project-title" type="text" name="title" placeholder="&nbsp;&nbsp;&nbsp;그룹 제목을 적어주세요 (0 ~ 20자)"
+        <input className="project-title" type="text" name="title" style={{backgroundColor : darkMode ? 'white' : ''}} placeholder="&nbsp;&nbsp;&nbsp;그룹 제목을 적어주세요 (0 ~ 20자)"
         onChange={(e) => {
           setTitle(e.target.value);
         }}></input>
@@ -94,12 +96,12 @@ const AddProject = () => {
             <p className="modal-p2">20자 이내로 작성해주세요</p>
           ) : null
         }
-        <input className="sub-title" type="text" name="sub-title" placeholder="&nbsp;&nbsp;&nbsp;그룹의 간단한 설명을 적어주세요 (0 ~ 20자)" onChange={(e) => {
+        <input className="sub-title" type="text" name="sub-title" style={{backgroundColor : darkMode ? 'white' : ''}} placeholder="&nbsp;&nbsp;&nbsp;그룹의 간단한 설명을 적어주세요 (0 ~ 20자)" onChange={(e) => {
           setSubTitle(e.target.value);
         }}></input>
 
         <div className="buttons">
-        <button className="create" onClick={() => {createNewGroup()}}>create</button>
+        <button className="create" style={{backgroundColor : darkMode ? 'transparent' : '', border : darkMode ? '1px solid white' : '', color : darkMode ? 'white' : ''}} onClick={() => {createNewGroup()}}>create</button>
         <button className="cancel" onClick={() => {
                     dispatch(setModal(false));
         }}>cancel</button>

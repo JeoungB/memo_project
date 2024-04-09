@@ -9,10 +9,11 @@ const ContentPage = () => {
 
     const [menu, setMenu] = useState(false);
     const contentRef = useRef();
-    let memoList = useSelector((state) => state.memo);
+    const darkMode = useSelector((state) => state.darkMode);
+    const memoList = useSelector((state) => state.memo);
+    let {id} = useParams();
     let dispatch = useDispatch();
     let navigate = useNavigate();
-    let {id} = useParams();
 
     let currentItem = memoList.find((memo) => memo.id == id);
 
@@ -27,7 +28,7 @@ const ContentPage = () => {
                     <div className="tag">
                       <p>{currentItem?.subTitle}</p>
                       <div className="menu-container">
-                        <p className="menu-icon" onClick={(e) => {
+                        <p className="menu-icon" style={{color : darkMode ? 'white' : ''}} onClick={(e) => {
                           e.stopPropagation();
                           setMenu(!menu)
                         }}>. . .</p>
@@ -58,7 +59,7 @@ const ContentPage = () => {
                       </div>
                     </div>
                     <div className="viwer"
-                    style={{width : "59vw", height : "55vh", border : "1px solid black", marginTop : "30px"}} 
+                    style={{width : "59vw", height : "55vh", border : darkMode ? '1px solid white' : "1px solid black", marginTop : "30px"}} 
                     dangerouslySetInnerHTML={{__html : DOMPurify.sanitize(currentItem.content)}}>
                     </div>
                   </div>

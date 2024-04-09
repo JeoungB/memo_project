@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import star from "../imgs/star2.png";
@@ -11,12 +11,32 @@ const HomePage = (props) => {
 
     const memoList = useSelector((state) => state.memo);
     const searchDatas = useSelector((state) => state.searchMemos);
+    const darkMode = useSelector((state) => state.darkMode);
     const [memo, setMemo] = useState(memoList);
     const [title, setTitle] = useState("Home");
     const [subTitle, setSubTitle] = useState("Memos");
     const [scrollModal, setScrollModal] = useState(false);
+    const contentBox = document.getElementsByClassName('content');
+    const contentBoxDate = document.getElementsByClassName('memo-date');
     let dispatch = useDispatch();
     let navigate = useNavigate();
+    
+    useEffect(() => {
+      if(darkMode === true) {
+        for(let i = 0 ; i < contentBox.length ; i++) {
+          contentBox[i].style.backgroundColor = 'rgba(216, 216, 216, 0.123)';
+          contentBox[i].style.borderRadius = '10px';
+          contentBoxDate[i].style.color = 'white';
+        }
+      }
+
+      if(darkMode === false) {
+        for(let i = 0 ; i < contentBox.length ; i++) {
+          contentBox[i].style.backgroundColor = 'white';
+          contentBoxDate[i].style.color = 'gray';
+        }
+      }
+    }, [darkMode]);
 
     window.addEventListener('scroll', function() {
       let scroll = this.scrollY;
@@ -72,7 +92,7 @@ const HomePage = (props) => {
                       <p>{subTitle}</p>
                     )
                   }
-                  <p className="addmemo" onClick={() => {
+                  <p className="addmemo" style={{color : darkMode ? 'white' : ''}} onClick={() => {
                     navigate('/write');
                   }}>+ Addmemo</p>
                 </div>
@@ -80,13 +100,17 @@ const HomePage = (props) => {
                   {
                     memo.map((memoList) => {
                       return <div className="content-container" key={memoList.id}>
-                      <div className="content" onClick={() => {navigate(`/content/${memoList.id}`)}}>
+                      <div className="content" onClick={() => {
+                        navigate(`/content/${memoList.id}`)}}>
                         <div className="memo-color" style={{backgroundColor : `${memoList.color}`}}></div>
                         <h2>{memoList.title}</h2>
-                        <div className="subtitle">{memoList.subTitle}</div>
+                        <div className="subtitle" style={{backgroundColor : darkMode ? 'gray' : 'rgba(167, 166, 166, 0.373)', display : memoList.subTitle ? '' : 'none'}}>{memoList.subTitle}</div>
                         </div>
-                        <div className="memo-menu" onClick={() => {navigate(`/content/${memoList.id}`)}}>
-                        <p>{memoList.date}</p>
+                        <div className="memo-menu" onClick={() => {
+
+
+                          navigate(`/content/${memoList.id}`)}}>
+                        <p className="memo-date">{memoList.date}</p>
                         <i className="fa-solid fa-trash-can" onClick={(e) => {
                           e.stopPropagation();
                           let result = window.confirm(`${memoList.title}을 삭제하시겠습니까?`);
@@ -101,13 +125,19 @@ const HomePage = (props) => {
                         <div className="important">
                           {
                             memoList.important ? (
-                              <img alt="important-star" src={yellowStar} onClick={(e) => {
+                              <img alt="important-star" className="star" src={yellowStar} onClick={(e) => {
                                 e.stopPropagation();
                                 handleImportant(memoList.id)}}/>
                             ) : (
-                              <img alt="important-star" src={star} onClick={(e) => {
-                                e.stopPropagation();
-                                handleImportant(memoList.id)}}/>
+                              darkMode ? (
+                                <i className="fa-solid fa-star" onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleImportant(memoList.id)}}></i>
+                              ) : (
+                                <img alt="important-star" className="star" src={star} onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleImportant(memoList.id)}}/>
+                              )
                             )
                           }
                         </div>
@@ -118,7 +148,7 @@ const HomePage = (props) => {
                 </div>
                 {
                   scrollModal ? (
-                    <div className="scroll-button" onClick={() => {
+                    <div className="scroll-button" style={{border : darkMode ? '1px solid white' : '', backgroundColor : darkMode ? 'white' : ''}} onClick={() => {
                       window.scroll(0 ,0);
                     }}>
                     <img src={scrollTopIcon} alt="스크롤 아이콘" />

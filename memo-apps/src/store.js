@@ -7,9 +7,10 @@ import { getDefaultMiddleware } from "@reduxjs/toolkit";
 let memo = createSlice({
     name : "memo",
     initialState : [
-        {id : 0, title : "영어 공부", content : "영단어 리스트~~", subTitle : "영어 단어 외우기", date : "2024-03-18", important : false, group : "", check : false, color : ""},
-        {id : 2, title : "운동", content : "팔굽혀펴기, 딥스", subTitle : "매일 1시간씩", date : "2024-03-20", important : false, group : "", check : false, color : ""},
-        {id : 3, title : "리액트 스터디", content : "라이프 사이클, 상태관리 등등", subTitle : "리액트 공부 관련 메모", date : "2024-03-25", important : false, group : "", check : false, color : ""}
+        {id : 0, title : "영어 공부", content : "영단어 리스트~~", subTitle : "영어 단어 외우기", date : "2024-03-18", important : true, group : 0, check : true, color : "#ff00ff"},
+        {id : 2, title : "근력 운동", content : "팔굽혀펴기, 딥스", subTitle : "매일 1시간씩", date : "2024-03-20", important : false, group : 1, check : true, color : "#0000ff"},
+        {id : 3, title : "리액트 스터디", content : "라이프 사이클, 상태관리 등등", subTitle : "리액트 공부 관련 메모", date : "2024-03-25", important : false, group : 0, check : true, color : "#ff00ff"},
+        {id : 4, title : "이미지 메모", content : "", subTitle : "이미지와 함께", date : "2024-04-01", important : false, group : "", check : false, color : ""}
     ],
     reducers : {
         addMemo(state, action) {
@@ -99,9 +100,9 @@ let memo = createSlice({
 let groupMemo = createSlice({
     name : "groupmemo",
     initialState : [
-        {id : 0, title : "First Group", subTitle : "첫번째 그룹 메모들", color : "#"},
-        {id : 1, title : "Second Group", subTitle : "두번째 그룹 메모들", color : "#0000ff"},
-        {id : 2, title : "Third Group Important Name", subTitle : "두번째 그룹 메모들", color : "#a52a2a"}
+        {id : 0, title : "공부 관련", subTitle : "공부에 필요한 메모", color : "#ff00ff"},
+        {id : 1, title : "운동", subTitle : "운동 관련 메모", color : "#0000ff"},
+        {id : 2, title : "여러가지 메모들 모음집", subTitle : "메모 모음집", color : "#a52a2a"}
     ],
     reducers : {
         addGroup(state, action) {
@@ -152,13 +153,14 @@ let searchMemos = createSlice({
 
 let darkMode = createSlice({
     name : "darkMode",
-    initialState : {value : "false"},
+    initialState : false,
     reducers : {
         setDark(state) {
-            state.value = !state.value;
+            state= !state;
+            return state;
         }
     }
-})
+});
 
 export let { addMemo, deleteMemo, updateMemo, importantMemo, addGroupMemo, deleteGroupMemo, checkMemo, allDeleteGroupMemo, canleCheck } = memo.actions;
 export let { setModal } = modal.actions;
@@ -173,7 +175,7 @@ const reducers = combineReducers({
     groupMemo : groupMemo.reducer,
     selectModal : selectModal.reducer,
     searchMemos : searchMemos.reducer,
-    darkMode : darkMode.reducer
+    darkMode : darkMode.reducer,
 });
 
 const persistConfig = {

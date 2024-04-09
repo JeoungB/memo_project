@@ -5,7 +5,6 @@ import noneMemo from '../imgs/none-memo.png';
 import { allDeleteGroupMemo, setSelectModal } from '../store';
 import yellowStar from "../imgs/yellow-star.png";
 import star from "../imgs/star2.png";
-import gropOutIcon from "../imgs/group-out.png";
 import { importantMemo } from "../store";
 import { deleteGroupMemo } from '../store';
 import { deleteGroup } from '../store';
@@ -16,12 +15,13 @@ const GroupContents = () => {
     const groupMemo = useSelector((state) => state.groupMemo);
     const selectModal = useSelector((state) => state.selectModal);
     const memoList = useSelector((state) => state.memo);
+    const darkMode = useSelector((state) => state.darkMode);
     const [menubar, setmenubar] = useState(false);
     let {id} = useParams();
     let dispatch = useDispatch();
     let navigate = useNavigate();
 
-        const handleImportant = (id) => {
+    const handleImportant = (id) => {
       dispatch(importantMemo(id));
     }
 
@@ -34,7 +34,7 @@ const GroupContents = () => {
                   <h2>{currentGroup.title}</h2>
                   <div className="tag">
                     <p>{currentGroup.subTitle}</p>
-                    <div className='addmemo group-menus' onClick={() => {setmenubar(!menubar)}}> . . .
+                    <div className='addmemo group-menus' style={{color : darkMode ? 'white' : ''}} onClick={() => {setmenubar(!menubar)}}> . . .
                     {
                       menubar ? (
                         <div className='menus-container'>
@@ -70,7 +70,8 @@ const GroupContents = () => {
                       ) : (
                         groupMemos?.map((groupMemos) => {
                           return <div className="content-container" key={groupMemos.id}>
-                          <div className="content" onClick={() => {navigate(`/content/${groupMemos.id}`)}}>
+                          <div className="content" style={{backgroundColor : darkMode ? 'rgba(216, 216, 216, 0.123)' : ''}} onClick={() => {
+                            navigate(`/content/${groupMemos.id}`)}}>
                             <div className="memo-color" style={{backgroundColor : `${groupMemos.color}`}}></div>
                             <h2>{groupMemos.title}</h2>
                             <p className='group-out' onClick={(e) => {
@@ -80,7 +81,7 @@ const GroupContents = () => {
                                 dispatch(deleteGroupMemo(groupMemos.id));
                               }
                             }}>
-                              <img src={gropOutIcon} alt='그룹에서 삭제' />
+                              <i className="fa-solid fa-arrow-right-from-bracket"></i>
                             </p>
                             <div className="subtitle">{groupMemos.subTitle}</div>
                             </div>
@@ -91,9 +92,19 @@ const GroupContents = () => {
                             <div className="important">
                               {
                                 groupMemos.important ? (
-                                  <img alt="important-star" src={yellowStar} onClick={() => {handleImportant(groupMemos.id)}}/>
+                                  <img alt="important-star" src={yellowStar} onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleImportant(groupMemos.id)}}/>
                                 ) : (
-                                  <img alt="important-star" src={star} onClick={() => {handleImportant(groupMemos.id)}}/>
+                                  darkMode ? (
+                                    <i className="fa-solid fa-star" onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleImportant(memoList.id)}}></i>
+                                  ) : (
+                                    <img alt="important-star" src={star} onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleImportant(groupMemos.id)}}/>
+                                  )
                                 )
                               }
                             </div>

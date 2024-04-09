@@ -17,7 +17,7 @@
     height: 500px;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    z-index: 7;
+    z-index: 12;
     background-color: rgb(255, 255, 255);
 }
 

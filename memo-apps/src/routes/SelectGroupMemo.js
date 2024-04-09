@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import star from "../imgs/star2.png";
 import yellowStar from "../imgs/yellow-star.png";
 import checkIcon from "../imgs/check-icon.png";
-import { useState } from "react";
 import { addGroupMemo, checkMemo, setSelectModal, canleCheck } from "../store";
 import { useParams } from "react-router-dom";
 
@@ -11,6 +10,7 @@ const SelectGroupMemo = () => {
 
     const memoList = useSelector((state) => state.memo);
     const groupMemo = useSelector((state) => state.groupMemo);
+    const darkMode = useSelector((state) => state.darkMode);
     let {id} = useParams();
     let dispatch  = useDispatch();
 
@@ -19,11 +19,11 @@ const SelectGroupMemo = () => {
 
     return(
         <div className="select-groupmemo">
-            <div className="select-modal">
+            <div className="select-modal" style={{backgroundColor : darkMode ? '#2B2B2B' : 'white', border : darkMode ? 'black' : ''}}>
                 <div className="select-contents">
                     {
                         noneGoupMemos.map((noneGoupMemos) => {
-                            return <div className="content-container select-container" key={noneGoupMemos.id} onClick={() => {
+                            return <div className="content-container select-container" style={{backgroundColor : darkMode ? 'rgba(216, 216, 216, 0.123)' : 'white'}} key={noneGoupMemos.id} onClick={() => {
                                 dispatch(checkMemo(noneGoupMemos.id));
                             }}>
                             <div className="content select">
@@ -36,10 +36,10 @@ const SelectGroupMemo = () => {
                                 }
                               <div className="memo-color"></div>
                               <h2>{noneGoupMemos.title}</h2>
-                              <div className="subtitle">{noneGoupMemos.subTitle}</div>
+                              <div className="subtitle" style={{backgroundColor : darkMode ? 'gray' : 'rgba(167, 166, 166, 0.373)', display : noneGoupMemos.subTitle ? '' : 'none'}}>{noneGoupMemos.subTitle}</div>
                               </div>
                               <div className="memo-menu select-memo-menu">
-                              <p>{noneGoupMemos.date}</p>
+                              <p style={{color : darkMode ? 'white' : 'gray'}}>{noneGoupMemos.date}</p>
                               <i className="fa-solid fa-trash-can"></i>
                               <i className="fa-solid fa-pen-to-square"></i>
                               <div className="important">
@@ -47,7 +47,11 @@ const SelectGroupMemo = () => {
                                   noneGoupMemos.important ? (
                                     <img alt="important-star" src={yellowStar} />
                                   ) : (
-                                    <img alt="important-star" src={star} />
+                                    darkMode ? (
+                                        <i class="fa-solid fa-star"></i>
+                                    ) : (
+                                        <img alt="important-star" src={star} />
+                                    )
                                   )
                                 }
                               </div>
@@ -56,8 +60,8 @@ const SelectGroupMemo = () => {
                         })
                     }
                 </div>
-                <div className="select-bottom">
-                    <button className="add-memo" onClick={() => {
+                <div className="select-bottom" style={{backgroundColor : darkMode ? '#2B2B2B' : 'white'}}>
+                    <button className="add-memo" style={{backgroundColor : darkMode ? 'transparent' : '', border : darkMode ? '1px solid white' : '', color : darkMode ? 'white' : ''}} onClick={() => {
                         dispatch(addGroupMemo([currentGroup.id, currentGroup.color]));
                         dispatch(setSelectModal(false));
                     }}>add</button>
