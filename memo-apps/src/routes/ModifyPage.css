@@ -1,0 +1,14 @@
+.none-page {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-25%, -25%);
+    width: 400px;
+    text-align: center;
+}
+
+.none-page img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
