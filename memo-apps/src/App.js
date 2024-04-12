@@ -4,6 +4,7 @@
 // <a href="https://www.flaticon.com/kr/free-icons/" title="별 아이콘">별 아이콘  제작자: rizky adhitya pradana - Flaticon</a>
 import "./App.css";
 import "./reset.css";
+import "./AppMedia800.css";
 import searchIcon from "./imgs/searchIcon.png";
 import home from "./imgs/house-solid.svg";
 import calender from "./imgs/calender.svg";
@@ -47,11 +48,31 @@ let Category = styled.div`
   overflow: auto;
 `;
 
+let Sideber = styled.div`
+width: 20%;
+height: 100%;
+padding-top: 45px;
+margin-top: -80px;
+position: fixed;
+top: 160px;
+z-index: 3;
+background-color: rgba(128, 128, 128, 0.089);
+
+@media (max-width : 800px) {
+  width: ${(props) => props.$sideBarWidth}px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+}
+`
+
 function App() {
   const [menubarImg, setMenubarImg] = useState(0);
   const [categoryHeight, setCategoryHeight] = useState();
   const [imgToggle, setimgToggle] = useState(true);
   const [search, setSearch] = useState("");
+  const [bar, setBar] = useState(false);
+  const [barPosition, setBarPosition] = useState(0);
+  const [sideBarWidth, setSideBarWidth] = useState(0);
   const body = document.querySelector("body");
   const memoList = useSelector((state) => state.memo);
   const searchDatas = useSelector((state) => state.searchMemos);
@@ -68,6 +89,18 @@ function App() {
   let importantMemos = memoList.filter(
     (memoList) => memoList.important === true
   );
+
+  useEffect(() => {
+    if(bar === false) {
+      setSideBarWidth(0);
+      setBarPosition(0);
+    }
+
+    if(bar === true) {
+      setSideBarWidth(200);
+      setBarPosition(200);
+    }
+  }, [bar]);
 
   useEffect(() => {
     if (darkMode === true) {
@@ -167,7 +200,7 @@ function App() {
               </header>
 
               <div className="main-container">
-                <div className="sidebar">
+                <Sideber className="sidebar" $sideBarWidth={sideBarWidth}>
                   <div
                     className="sidebar-menu home"
                     onClick={() => {
@@ -247,7 +280,20 @@ function App() {
                       })}
                     </Category>
                   </div>
-                </div>
+                  <div
+                    className="side-bar-darkmode"
+                    onClick={() => {
+                      dispatch(setDark());
+                    }}
+                  >
+                    {darkMode ? (
+                      <img className="moon" src={moon} alt="moon" />
+                    ) : (
+                      <img className="sun" src={sun} alt="sun" />
+                    )}
+                  </div>
+                </Sideber>
+                <div className="bar" style={{left : `${barPosition}px`}} onClick={() => setBar(!bar)}></div>
 
                 <div className="content-container">
                   <div className="search">
