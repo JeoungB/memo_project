@@ -1,4 +1,5 @@
 import "./GroupContents.css";
+import "./GroupContentsMedia.css"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import noneMemo from "../imgs/none-memo.png";
@@ -9,7 +10,7 @@ import { importantMemo } from "../store";
 import { deleteGroupMemo } from "../store";
 import { deleteGroup } from "../store";
 import notGroup from "../imgs/not-group.png";
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useRef, useEffect } from "react";
 
 const GroupContents = () => {
   const groupMemo = useSelector((state) => state.groupMemo);
@@ -18,11 +19,26 @@ const GroupContents = () => {
   const darkMode = useSelector((state) => state.darkMode);
   const [groupMemos, setGroupMemos] = useState([]);
   const [menubar, setmenubar] = useState(false);
+  const menubarRef = useRef(null);
   let { id } = useParams();
   let dispatch = useDispatch();
   let navigate = useNavigate();
 
   let currentGroup = groupMemo.find((groupMemo) => groupMemo.id == id);
+
+  useEffect(() => {
+    const handleMenuClose = (e) => {
+      if(menubar && (!menubarRef.current.contains(e.target))) {
+        setmenubar(false);
+      }
+    };
+
+    document.addEventListener('click', handleMenuClose);
+
+    return () => document.addEventListener('click', handleMenuClose);
+  }, []);
+
+  console.log(menubar)
 
   useLayoutEffect(() => {
     if (currentGroup !== undefined) {
@@ -53,6 +69,7 @@ const GroupContents = () => {
           <div className="tag">
             <p>{currentGroup.subTitle}</p>
             <div
+             ref={menubarRef}
               className="addmemo group-menus"
               style={{ color: darkMode ? "white" : "" }}
               onClick={() => {

@@ -4,7 +4,7 @@
 // <a href="https://www.flaticon.com/kr/free-icons/" title="별 아이콘">별 아이콘  제작자: rizky adhitya pradana - Flaticon</a>
 import "./App.css";
 import "./reset.css";
-import "./AppMedia800.css";
+import "./AppMedia.css";
 import searchIcon from "./imgs/searchIcon.png";
 import home from "./imgs/house-solid.svg";
 import calender from "./imgs/calender.svg";
@@ -12,13 +12,14 @@ import star from "./imgs/star.svg";
 import arrow from "./imgs/arrow.svg";
 import sun from "./imgs/sun.png";
 import moon from "./imgs/moon.png";
+import barArrow from "./imgs/bar-arrow.png";
 import WritePage from "./routes/writePage";
 import { Routes, Route, useNavigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import HomePage from "./routes/HomePage";
 import ContentPage from "./routes/ContentPage";
 import AddProject from "./routes/AddProject";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { setModal } from "./store";
 import { changeSearch } from "./store";
@@ -48,14 +49,14 @@ let Category = styled.div`
   overflow: auto;
 `;
 
-let Sideber = styled.div`
+let Sidebar = styled.div`
 width: 20%;
 height: 100%;
 padding-top: 45px;
 margin-top: -80px;
 position: fixed;
 top: 160px;
-z-index: 3;
+z-index: 30;
 background-color: rgba(128, 128, 128, 0.089);
 
 @media (max-width : 800px) {
@@ -80,6 +81,8 @@ function App() {
   const groupMemo = useSelector((state) => state.groupMemo);
   const selectModal = useSelector((state) => state.selectModal);
   const darkMode = useSelector((state) => state.darkMode);
+  const sidebarRef = useRef(null);
+  const barRef = useRef(null);
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let day = new Date();
@@ -89,6 +92,20 @@ function App() {
   let importantMemos = memoList.filter(
     (memoList) => memoList.important === true
   );
+
+  useEffect(() => {
+    window.addEventListener('click', (e) => {
+      if(!sidebarRef.current.contains(e.target) && !barRef.current.contains(e.target)) {
+        setBar(false);
+        setSideBarWidth(0);
+        setBarPosition(0);
+      }
+    });
+
+    return() => {
+      window.addEventListener('click' , () => {});
+    }
+  }, []);
 
   useEffect(() => {
     if(bar === false) {
@@ -200,7 +217,7 @@ function App() {
               </header>
 
               <div className="main-container">
-                <Sideber className="sidebar" $sideBarWidth={sideBarWidth}>
+                <Sidebar className="sidebar" ref={sidebarRef} $sideBarWidth={sideBarWidth}>
                   <div
                     className="sidebar-menu home"
                     onClick={() => {
@@ -292,8 +309,10 @@ function App() {
                       <img className="sun" src={sun} alt="sun" />
                     )}
                   </div>
-                </Sideber>
-                <div className="bar" style={{left : `${barPosition}px`}} onClick={() => setBar(!bar)}></div>
+                </Sidebar>
+                <div className="bar" ref={barRef} style={{left : `${barPosition}px`}} onClick={() => setBar(!bar)}>
+                    <img src={barArrow} alt="사이드 바 이미지" />
+                </div>
 
                 <div className="content-container">
                   <div className="search">

@@ -183,6 +183,15 @@ body {
   background-color: rgb(224, 224, 224);
 }
 
+.bar img {
+  position: relative;
+  top: 35%;
+  left: -2px;
+  transform: translate(0, -50%);
+  width: 20px;
+  height: 20px;
+}
+
 /* content */
 
 .main-container {
