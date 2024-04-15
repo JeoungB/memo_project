@@ -39,3 +39,10 @@ app.post("/img", upload.single("img"), (req, res) => {
   const IMG_URL = `http://localhost:8080/uploadImgs/${req.file.filename}`;
   res.json({ url: IMG_URL });
 });
+
+
+app.use(express.static(path.join(__dirname, 'memo-apps/build')));
+
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'memo-apps/build/index.html'));
+})
