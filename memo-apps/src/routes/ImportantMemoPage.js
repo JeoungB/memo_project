@@ -1,6 +1,7 @@
 import HomePage from "./HomePage";
 import { useSelector } from "react-redux";
 import "./ImportantMemoPage.css";
+import "./ImportantMemoPageMedia.css";
 import notImportant from "../imgs/not-important.png";
 
 const ImportantMemoPage = () => {

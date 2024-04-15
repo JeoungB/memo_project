@@ -1,0 +1,11 @@
+@media (max-width : 800px) {
+    .today .alert {
+        left: 35%;
+    }
+}
+
+@media (max-width : 600px) {
+    .today .alert {
+        left: 180px;
+    }
+}

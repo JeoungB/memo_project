@@ -1,0 +1,11 @@
+@media (max-width : 800px) {
+    .searchpage .alert {
+        left: 35%;
+    }
+}
+
+@media (max-width : 600px) {
+    .searchpage .alert {
+        left: 155px;
+    }
+}

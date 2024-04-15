@@ -1,0 +1,12 @@
+@media (max-width : 690px) {
+    .select-container {
+        width: 600px;
+    }
+}
+
+@media (max-width : 600px) {
+    .select-modal {
+        width: 500px;
+        left: 290px;
+    }
+}

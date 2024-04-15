@@ -1,15 +1,11 @@
 @media (max-width : 800px) {
-    .groupcontents {
-        width : 100%;
-    }
-
-    .not-group {
+    .important-memo-page .alert {
         left: 35%;
     }
 }
 
 @media (max-width : 600px) {
-    .not-group {
+    .important-memo-page .alert {
         left: 185px;
     }
 }

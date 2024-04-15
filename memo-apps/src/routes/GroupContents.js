@@ -1,5 +1,5 @@
 import "./GroupContents.css";
-import "./GroupContentsMedia.css"
+import "./GroupContentsMedia.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import noneMemo from "../imgs/none-memo.png";
@@ -8,7 +8,7 @@ import yellowStar from "../imgs/yellow-star.png";
 import star from "../imgs/star2.png";
 import { importantMemo } from "../store";
 import { deleteGroupMemo } from "../store";
-import { deleteGroup } from "../store";
+import { deleteGroup, deleteMemo } from "../store";
 import notGroup from "../imgs/not-group.png";
 import { useState, useLayoutEffect, useRef, useEffect } from "react";
 
@@ -19,7 +19,8 @@ const GroupContents = () => {
   const darkMode = useSelector((state) => state.darkMode);
   const [groupMemos, setGroupMemos] = useState([]);
   const [menubar, setmenubar] = useState(false);
-  const menubarRef = useRef(null);
+  const menuStateRef = useRef(false);
+  const menubarRef = useRef();
   let { id } = useParams();
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -28,17 +29,18 @@ const GroupContents = () => {
 
   useEffect(() => {
     const handleMenuClose = (e) => {
-      if(menubar && (!menubarRef.current.contains(e.target))) {
+      if (menuStateRef.current && !menubarRef.current.contains(e.target)) {
         setmenubar(false);
+        menuStateRef.current = false;
       }
     };
 
-    document.addEventListener('click', handleMenuClose);
+    window.document.addEventListener("click", handleMenuClose);
 
-    return () => document.addEventListener('click', handleMenuClose);
+    return () => {
+      window.document.addEventListener("click", handleMenuClose);
+    };
   }, []);
-
-  console.log(menubar)
 
   useLayoutEffect(() => {
     if (currentGroup !== undefined) {
@@ -69,17 +71,18 @@ const GroupContents = () => {
           <div className="tag">
             <p>{currentGroup.subTitle}</p>
             <div
-             ref={menubarRef}
               className="addmemo group-menus"
               style={{ color: darkMode ? "white" : "" }}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
+                menuStateRef.current = !menuStateRef.current;
                 setmenubar(!menubar);
               }}
             >
               {" "}
               . . .
               {menubar ? (
-                <div className="menus-container">
+                <div className="menus-container" ref={menubarRef}>
                   <div
                     className="addmemo group-addmemo"
                     onClick={(e) => {
@@ -161,8 +164,28 @@ const GroupContents = () => {
                     </div>
                     <div className="memo-menu">
                       <p>{groupMemos.date}</p>
-                      <i className="fa-solid fa-trash-can"></i>
-                      <i className="fa-solid fa-pen-to-square"></i>
+                      {groupMemos.modify ? (
+                        <p style={{ fontSize: "14px" }}>수정됨</p>
+                      ) : null}
+                      <i
+                        className="fa-solid fa-trash-can"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          let result = window.confirm(
+                            `${groupMemos.title}을 삭제하시겠습니까?`
+                          );
+                          if (result) {
+                            dispatch(deleteMemo(groupMemos.id));
+                          }
+                        }}
+                      ></i>
+                      <i
+                        className="fa-solid fa-pen-to-square"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/modify/${groupMemos.id}`);
+                        }}
+                      ></i>
                       <div className="important">
                         {groupMemos.important ? (
                           <img
@@ -178,7 +201,7 @@ const GroupContents = () => {
                             className="fa-solid fa-star"
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleImportant(memoList.id);
+                              handleImportant(groupMemos.id);
                             }}
                           ></i>
                         ) : (

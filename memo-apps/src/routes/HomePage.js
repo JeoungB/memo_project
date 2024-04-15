@@ -140,6 +140,11 @@ const HomePage = (props) => {
                   }}
                 >
                   <p className="memo-date">{memoList.date}</p>
+                  {
+                    memoList.modify ? (
+                      <p style={{fontSize : '14px'}}>수정됨</p>
+                    ) : null
+                  }
                   <i
                     className="fa-solid fa-trash-can"
                     onClick={(e) => {

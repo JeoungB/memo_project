@@ -7,10 +7,10 @@ import { getDefaultMiddleware } from "@reduxjs/toolkit";
 let memo = createSlice({
     name : "memo",
     initialState : [
-        {id : 0, title : "영어 공부", content : "영단어 리스트~~", subTitle : "영어 단어 외우기", date : "2024-03-18", important : true, group : 0, check : true, color : "#ff00ff"},
-        {id : 2, title : "근력 운동", content : "팔굽혀펴기, 딥스", subTitle : "매일 1시간씩", date : "2024-03-20", important : false, group : 1, check : true, color : "#0000ff"},
-        {id : 3, title : "리액트 스터디", content : "라이프 사이클, 상태관리 등등", subTitle : "리액트 공부 관련 메모", date : "2024-03-25", important : false, group : 0, check : true, color : "#ff00ff"},
-        {id : 4, title : "강아지 사진 모음", content : "<p><img src=\"http://localhost:8080/uploadImgs/강아지1712842521305.jpg\"></p><p>강아지는 귀여워요</p><p><br></p><p><img src=\"http://localhost:8080/uploadImgs/강아지21712842584627.jpg\"></p><p>자고 있는 모습도 귀여워요</p>", subTitle : "강아지는 귀여워요", date : "2024-04-01", important : false, group : "", check : false, color : ""}
+        {id : 0, title : "영어 공부", content : "영단어 리스트~~", subTitle : "영어 단어 외우기", date : "2024-03-18", important : true, group : 0, check : true, color : "#ff00ff", modify : false},
+        {id : 2, title : "근력 운동", content : "팔굽혀펴기, 딥스", subTitle : "매일 1시간씩", date : "2024-03-20", important : false, group : 1, check : true, color : "#0000ff", modify : false},
+        {id : 3, title : "리액트 스터디", content : "라이프 사이클, 상태관리 등등", subTitle : "리액트 공부 관련", date : "2024-03-25", important : false, group : 0, check : true, color : "#ff00ff", modify : false},
+        {id : 4, title : "강아지 사진 모음", content : "<p><img src=\"http://localhost:8080/uploadImgs/강아지1712842521305.jpg\"></p><p>강아지는 귀여워요</p><p><br></p><p><img src=\"http://localhost:8080/uploadImgs/강아지21712842584627.jpg\"></p><p>자고 있는 모습도 귀여워요</p>", subTitle : "강아지는 귀여워요", date : "2024-04-01", important : false, group : "", check : false, color : "", modify : false}
     ],
     reducers : {
         addMemo(state, action) {

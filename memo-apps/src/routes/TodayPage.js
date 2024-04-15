@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import HomePage from "./HomePage";
 import "./Today.css";
+import "./TodayMedia.css";
 import notToday from "../imgs/not-today.png";
 
 const TodayPage = () => {

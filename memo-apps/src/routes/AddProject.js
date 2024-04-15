@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./AddProject.css";
+import "./AddProjectMedia.css";
 import { ChromePicker } from "react-color";
 import { useDispatch } from "react-redux";
 import { addGroup, setModal } from "../store";
@@ -14,9 +15,25 @@ const AddProject = () => {
   const [color, setColor] = useState("#");
   const [notification, setNotification] = useState(true);
   const [colorModal, setColorModal] = useState(false);
+  const pikerRef = useRef(null);
+  const pikerStateRef = useRef(false);
+  const titleInputRef = useRef();
   const darkMode = useSelector((state) => state.darkMode);
   const TEXT_LENGHT = /^.{0,20}$/;
   let dispatch = useDispatch();
+
+  useEffect(() => {
+    window.addEventListener('click', (e) => {
+      if(pikerStateRef.current && !pikerRef.current.contains(e.target)) {
+        setColorModal(false);
+        pikerStateRef.current = false;
+      }
+    })
+  }, []);
+
+  useEffect(() => {
+    titleInputRef.current.focus();
+  }, []);
 
   const createNewGroup = () => {
     if (!title.trim()) {
@@ -68,7 +85,9 @@ const AddProject = () => {
         <div
           style={{ backgroundColor: `${color}` }}
           className="project-color-tag"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
+            pikerStateRef.current = !pikerStateRef.current;
             setColorModal(!colorModal);
           }}
         >
@@ -80,8 +99,9 @@ const AddProject = () => {
         </div>
 
         {colorModal ? (
-          <div className="color">
+          <div className="color" ref={pikerRef}>
             <ChromePicker
+              className="piker"
               color={color}
               onChangeComplete={handleChangeComplete}
             />
@@ -97,6 +117,7 @@ const AddProject = () => {
           className="project-title"
           type="text"
           name="title"
+          ref={titleInputRef}
           style={{ backgroundColor: darkMode ? "white" : "" }}
           placeholder="&nbsp;&nbsp;&nbsp;그룹 제목을 적어주세요 (0 ~ 20자)"
           onChange={(e) => {
@@ -144,7 +165,9 @@ const AddProject = () => {
 
       <div
         className="modal-containers"
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
+          pikerStateRef.current = false;
           dispatch(setModal(false));
         }}
       ></div>

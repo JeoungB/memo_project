@@ -1,4 +1,5 @@
 import "./SelectGroupMemo.css";
+import "./SelectGroupMedia.css";
 import { useDispatch, useSelector } from "react-redux";
 import star from "../imgs/star2.png";
 import yellowStar from "../imgs/yellow-star.png";
@@ -64,6 +65,11 @@ const SelectGroupMemo = () => {
                   <p style={{ color: darkMode ? "white" : "gray" }}>
                     {noneGoupMemos.date}
                   </p>
+                  {
+                    noneGoupMemos.modify ? (
+                      <p style={{fontSize : '14px'}}>수정됨</p>
+                    ) : null
+                  }
                   <i className="fa-solid fa-trash-can"></i>
                   <i className="fa-solid fa-pen-to-square"></i>
                   <div className="important">

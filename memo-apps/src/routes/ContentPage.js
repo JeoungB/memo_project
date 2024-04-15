@@ -5,6 +5,7 @@ import { deleteMemo } from "../store";
 import * as DOMPurify from "dompurify";
 import notContent from "../imgs/not-group.png";
 import "./ContentPage.css";
+import "./ContentPageMedia.css";
 
 const ContentPage = () => {
   const [menu, setMenu] = useState(false);
@@ -98,10 +99,7 @@ const ContentPage = () => {
           <div
             className="viwer"
             style={{
-              width: "59vw",
-              height: "55vh",
               border: darkMode ? "1px solid white" : "1px solid black",
-              marginTop: "30px",
             }}
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(currentItem.content),

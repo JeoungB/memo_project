@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 6;
+    z-index: 30;
     background-color: rgb(182, 177, 177);
     opacity: .5;
 }
@@ -13,11 +13,11 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50%;
+    width: 600px;
     height: 500px;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    z-index: 12;
+    z-index: 31;
     background-color: rgb(255, 255, 255);
 }
 
@@ -59,9 +59,10 @@
 
 
 .modal .color {
-    position: relative;
-    left: 83%;
-    top: 18%;
+    position: absolute;
+    left: 63%;
+    top: 19.5%;
+    z-index: 32;
 }
 
 .modal .project-title {

@@ -9,6 +9,7 @@ import axios from "axios";
 import spinner from "../imgs/Rolling-1s-200px.gif";
 import "react-quill/dist/quill.snow.css";
 import "./write.css";
+import "./WriteMedia.css";
 
 const WritePage = (props) => {
   const [title, setTitle] = useState("");
@@ -16,19 +17,34 @@ const WritePage = (props) => {
   const [subTitle, setsubTitle] = useState("");
   const [subtitleWarning, setSubTitleWarning] = useState(false);
   const [content, setContent] = useState("");
+  const [group, setGroup] = useState("");
+  const [color, setColor] = useState("");
+  const [memoCheck, setMemoCheck] = useState();
+  const [memoId, setMemoId] = useState();
+  const [memoImportant, setMemoImportant] = useState();
   const [loding, setLoding] = useState(false);
   const darkMode = useSelector((state) => state.darkMode);
   const quillRef = useRef();
+  const titleInputRef = useRef();
   const TEXT_LENGHT = /^.{0,10}$/;
   let dispatch = useDispatch();
   let navigates = useNavigate();
 
   useEffect(() => {
     if (props.currentMemo !== undefined) {
+      setMemoId(props.currentMemo.id);
       setTitle(props.currentMemo.title);
       setsubTitle(props.currentMemo.subTitle);
       setContent(props.currentMemo.content);
+      setGroup(props.currentMemo.group);
+      setColor(props.currentMemo.color);
+      setMemoCheck(props.currentMemo.check);
+      setMemoImportant(props.currentMemo.important);
     }
+  }, []);
+
+  useEffect(() => {
+    titleInputRef.current.focus();
   }, []);
 
   const imageHandler = () => {
@@ -128,6 +144,7 @@ const WritePage = (props) => {
       group: "",
       check: false,
       color: "",
+      modify : false
     };
 
     dispatch(addMemo(newMemo));
@@ -139,6 +156,23 @@ const WritePage = (props) => {
   const handleModify = (e) => {
     e.preventDefault();
 
+    if (!title.trim()) {
+      setTitleWarning(true);
+
+      return 0;
+    }
+
+    if (!title.match(TEXT_LENGHT)) {
+      setTitleWarning(true);
+      return 0;
+    }
+
+    if (!subTitle.match(TEXT_LENGHT)) {
+      setSubTitleWarning(true);
+
+      return 0;
+    }
+
     const today = new Date();
     const date =
       today.getFullYear() +
@@ -148,15 +182,16 @@ const WritePage = (props) => {
       today.getDate();
 
     let newMemo = {
-      id: Date.now(),
+      id: memoId,
       title: title,
       subTitle: subTitle,
       content: content,
       date: date,
-      important: false,
-      group: "",
-      check: false,
-      color: "",
+      important: memoImportant,
+      group: group,
+      check: memoCheck,
+      color: color,
+      modify : true
     };
 
     dispatch(updateMemo([props.id, newMemo]));
@@ -179,6 +214,7 @@ const WritePage = (props) => {
             type="text"
             value={title}
             name="title"
+            ref={titleInputRef}
             placeholder="제목을 작성해 주세요 (1 ~ 10자)"
             onChange={(e) => {
               setTitle(e.target.value);

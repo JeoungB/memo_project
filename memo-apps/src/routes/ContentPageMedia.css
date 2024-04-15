@@ -1,0 +1,34 @@
+@media (max-width : 800px) {
+    .main-content {
+        top: 206px;
+        left: 0;
+        margin : -73px 0 0 40px;
+    }
+
+    .main-content .tag {
+        width: 100%;
+      }
+
+      .viwer {
+        width: 90vw;
+    }
+
+    .menu-container {
+        margin-right: 0px;
+    }
+}
+
+@media (max-width : 600px) {
+    .viwer {
+        width: 500px;
+    }
+
+    .main-content .tag {
+        width: 600px;
+    }
+
+    .menu-icon {
+        position: relative;
+        left: -40px;
+    }
+}

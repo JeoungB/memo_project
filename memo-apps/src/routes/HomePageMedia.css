@@ -3,3 +3,24 @@
         width : 100%;
     }
 }
+
+@media (max-width : 650px) {
+    .content-box .content-container {
+        width: 600px;
+    }
+}
+
+@media (max-width : 600px) {
+    .content-box .content-container {
+        min-width: 520px;
+    }
+
+    .tag {
+        width: 600px;
+    }
+
+    .addmemo {
+        position: relative;
+        left: -30px;
+    }
+}
