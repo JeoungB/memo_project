@@ -3,7 +3,7 @@ import WritePage from "./writePage";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import noneMemo from "../imgs/not-group.png";
-import "./ModifyPage.css";
+import "../css/ModifyPage.css";
 
 const ModifyPage = () => {
   const [nonePage, setNonePage] = useState(false);

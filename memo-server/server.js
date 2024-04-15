@@ -26,10 +26,7 @@ const upload = multer({
       // 파일 확장자.
       const ext = path.extname(file.originalname);
       // 한글 파일 이름 깨짐 현상 수정.
-      file.originalname = Buffer.from(file.originalname, "latin1").toString(
-        "utf8"
-      );
-      console.log("file.originalname", file.originalname);
+      file.originalname = Buffer.from(file.originalname, "latin1").toString("utf8");
       cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
     },
   }),
@@ -40,10 +37,5 @@ app.post("/img", upload.single("img"), (req, res) => {
   console.log("저장된 파일의 이름", req.file.filename);
 
   const IMG_URL = `http://localhost:8080/uploadImgs/${req.file.filename}`;
-  console.log(IMG_URL);
   res.json({ url: IMG_URL });
-});
-
-app.post("/test", (req, res) => {
-  console.log("클라이언트에서 보낸 데이터", req.body);
 });

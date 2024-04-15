@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import nonePage from "../imgs/404.png";
-import "./NotFoundPage.css";
+import "../css/NotFoundPage.css";
 import { useNavigate } from "react-router-dom";
 
 const NotFoundPage = () => {

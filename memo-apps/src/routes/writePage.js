@@ -8,8 +8,8 @@ import ReactQuill from "react-quill";
 import axios from "axios";
 import spinner from "../imgs/Rolling-1s-200px.gif";
 import "react-quill/dist/quill.snow.css";
-import "./write.css";
-import "./WriteMedia.css";
+import "../css/write.css";
+import "../mediaCss/WriteMedia.css";
 
 const WritePage = (props) => {
   const [title, setTitle] = useState("");

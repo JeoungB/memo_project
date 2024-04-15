@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteMemo } from "../store";
 import * as DOMPurify from "dompurify";
 import notContent from "../imgs/not-group.png";
-import "./ContentPage.css";
-import "./ContentPageMedia.css";
+import "../css/ContentPage.css";
+import "../mediaCss/ContentPageMedia.css";
 
 const ContentPage = () => {
   const [menu, setMenu] = useState(false);

@@ -2,9 +2,9 @@
 
 // 이미지 출저.
 // <a href="https://www.flaticon.com/kr/free-icons/" title="별 아이콘">별 아이콘  제작자: rizky adhitya pradana - Flaticon</a>
-import "./App.css";
-import "./reset.css";
-import "./AppMedia.css";
+import "./css/App.css";
+import "./css/reset.css";
+import "./mediaCss/AppMedia.css";
 import searchIcon from "./imgs/searchIcon.png";
 import home from "./imgs/house-solid.svg";
 import calender from "./imgs/calender.svg";

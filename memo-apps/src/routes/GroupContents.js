@@ -1,5 +1,5 @@
-import "./GroupContents.css";
-import "./GroupContentsMedia.css";
+import "../css/GroupContents.css";
+import "../mediaCss/GroupContentsMedia.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import noneMemo from "../imgs/none-memo.png";

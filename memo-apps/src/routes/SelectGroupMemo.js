@@ -1,5 +1,5 @@
-import "./SelectGroupMemo.css";
-import "./SelectGroupMedia.css";
+import "../css/SelectGroupMemo.css";
+import "../mediaCss/SelectGroupMedia.css";
 import { useDispatch, useSelector } from "react-redux";
 import star from "../imgs/star2.png";
 import yellowStar from "../imgs/yellow-star.png";

@@ -1,7 +1,7 @@
 import HomePage from "./HomePage";
 import { useSelector } from "react-redux";
-import "./SearchPage.css";
-import "./SearchPageMedia.css";
+import "../css/SearchPage.css";
+import "../mediaCss/SearchPageMedia.css";
 import notFoundIcon from "../imgs/not-found.png";
 
 const SearchPage = () => {

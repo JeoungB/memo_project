@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import "./AddProject.css";
-import "./AddProjectMedia.css";
+import "../css/AddProject.css";
+import "../mediaCss/AddProjectMedia.css";
 import { ChromePicker } from "react-color";
 import { useDispatch } from "react-redux";
 import { addGroup, setModal } from "../store";

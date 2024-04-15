@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import star from "../imgs/star2.png";
 import yellowStar from "../imgs/yellow-star.png";
-import "./HomePage.css";
-import "./HomePageMedia.css";
+import "../css/HomePage.css";
+import "../mediaCss/HomePageMedia.css";
 import scrollTopIcon from "../imgs/scroll-top.png";
 import { deleteMemo, importantMemo } from "../store";
 
